@@ -18,7 +18,7 @@ class App extends Component {
     return (
 
         <React.Fragment>
-          <Navbar {...this.props} NavbarTitle={"Firebase Authentication"} />
+          <Navbar {...this.props} NavbarTitle={"HackDev"} />
           <Routes>
             {/*<Redirect from="/" to="/home" exact/>*/}
             <Route path="/" element={
