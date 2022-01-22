@@ -35,6 +35,7 @@ export default function Create_hackathon() {
     const [hackDescription, setHackDescription] = useState("");
     const hackathonCollectionRef = collection(db, "hackathons");
     const userCollection = collection(db, "users");
+    const channels = collection(db, "channels");
     const navigate = useNavigate();
 
 
@@ -49,7 +50,21 @@ export default function Create_hackathon() {
 
             // const hackathons = await collection(db, 'hackathons',uid);
             // console.log(uid)
-            const docRef = await addDoc(hackathonCollectionRef,{
+            var id =  doc(hackathonCollectionRef).id
+            await addDoc(doc(db,`hackathons/${id}`),{
+                "hackathon_id":id,
+                "hackName": hackName.toString(),
+                "organiser_name": user.displayName.toString(),
+                "organiser_email_id": user.email.toString(),
+                "website": website.toString(),
+                "registrationDate": Timestamp.fromDate(registrationDate._d),
+                "hackStart": Timestamp.fromDate(hackStartEnd[0]._d),
+                "hackEnd": Timestamp.fromDate(hackStartEnd[1]._d),
+                "hackDescription": hackDescription.html.toString(),
+            });
+
+            await addDoc(doc(db,`channels/${id}`),{
+                "hackathon_id":id,
                 "hackName": hackName.toString(),
                 "organiser_name": user.displayName.toString(),
                 "organiser_email_id": user.email.toString(),
@@ -62,7 +77,7 @@ export default function Create_hackathon() {
 
             await addDoc(collection(db,"users",user.uid,"hackathons_organised"),{
                 "hackName": hackName.toString(),
-                "hack_uid":docRef.id
+                "hack_uid":id
 
             }).then( data => {
                 notification.success({
