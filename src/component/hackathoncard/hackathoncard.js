@@ -106,7 +106,7 @@ export default function Hackathoncard(props) {
                         </span>
                         </ColorButton>
                         </>:<>
-                        <ColorButton size="small" component={NavLink} to={ props?.user?.email ? `/hackathon/${props.hackathonId}` : `/authenticate`} className="bg-success w-75 mx-auto" style={{
+                        <ColorButton size="small" component={NavLink} to={ props?.user?.email ? `/hackathon/overview/${props.hackathonId}` : `/authenticate`} className="bg-success w-75 mx-auto" style={{
                             borderRadius: '50px',
                         }}
                         >
