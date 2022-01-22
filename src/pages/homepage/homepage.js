@@ -8,7 +8,8 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import {getAuth,  onAuthStateChanged} from "firebase/auth";
 import Hackathoncard from "../../component/hackathoncard/hackathoncard";
-
+import {db} from '../../firebaseConfig/firebaseConfig';
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 // Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -18,6 +19,10 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 const card = ["","","","","","","","","","",""]
 
 class Homepage extends Component {
+    state = {
+        loading:false,
+        hackathons:[]
+    }
 
     handleEditorChange({ html, text }) {
         console.log('handleEditorChange', html, text);
@@ -32,7 +37,19 @@ class Homepage extends Component {
                 isAuth: !!user,
             })
 
+
         })
+        const q = query(collection(db, "hackathons"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const hack = [];
+            querySnapshot.forEach((doc) => {
+                hack.push(doc.data());
+            });
+            this.setState({
+                hackathons:hack
+            })
+            console.log("Current cities in CA: ", hack);
+        });
         this.props.onTryAutoSignUp()
         console.log(auth.currentUser)
     }
@@ -44,7 +61,7 @@ class Homepage extends Component {
             <div className={`${css.homepage} row justify-content-left`}>
                 
                 {
-                    card.map((hackathon)=>(
+                    this.state.hackathons.map((hackathon)=>(
                         <div 
                         style={{
                         //    width: '33.3%',
