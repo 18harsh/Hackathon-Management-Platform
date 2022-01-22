@@ -173,6 +173,7 @@ class Navbar extends Component {
                 <AppBar position="static" style={{
                     backgroundColor: "#1a508b"
                 }}>
+                
                     <Toolbar variant="dense" style={{
                         display: "flex",
                         justifyContent: "center",
@@ -269,6 +270,7 @@ class Navbar extends Component {
 
                     </Toolbar>
                 </AppBar>
+                
 
             </>
         );
