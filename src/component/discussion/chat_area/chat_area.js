@@ -99,6 +99,31 @@ export default function RightPanel(props) {
         }
     }, []);
 
+    const reloadChatUI = () => {
+        if(props.channelType === "message") {
+
+
+            const particpiapntRef = collection(db, "channels", props.hackathhonId, props.currentRoom);
+            const q = query(particpiapntRef,orderBy("messageCreatedAt", "asc"));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const hack = [];
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.data)
+                    hack.push(doc.data());
+                });
+                if (hack.length !== 0) {
+                    setMessages(hack);
+
+                }
+                console.log(hack)
+
+            });
+            setLoading(true);
+        } else if (props.channelType === "media") {
+
+        }
+    }
+
 
     const onSearch = async value => {
 
@@ -147,6 +172,9 @@ export default function RightPanel(props) {
                         size="large"
                         onSearch={onSearch}
                     />
+                    <ColorButton onClick={()=>{
+                        reloadChatUI();
+                    }}> Reload </ColorButton>
                 </div>
 
             </Card>

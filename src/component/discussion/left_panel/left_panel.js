@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import {addDoc, collection, doc, Timestamp} from "firebase/firestore";
+import {db} from "../../../firebaseConfig/firebaseConfig";
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -47,6 +49,7 @@ const useStyles = makeStyles({
 export default function LeftPanel(props) {
     const [roomName, setRoomName] = React.useState("");
     const classes = useStyles();
+    const hackathonCollectionRef = collection(db, "hackathons");
     // getModalStyle is not a pure function, we roll the style only on the first render
 
     const [open, setOpen] = React.useState(false);
@@ -59,9 +62,22 @@ export default function LeftPanel(props) {
         setOpen(false);
     };
 
-    const createRoomForChannel = () => {
-        if(roomName!='') {
-            console.log(roomName);
+    const createRoomForChannel = async () => {
+        if (roomName != '') {
+            var id2 =  doc(hackathonCollectionRef).id
+            await addDoc(collection(db, "channels", props.hackathhonId, "sub_channels_list"), {
+                "sub_channel_id": id2,
+                "sub_channel_name": roomName,
+                "sub_channel_code_name":roomName.split(' ').join("_").toLowerCase(),
+                "channel_type": "message"
+            })
+            await addDoc(collection(db, "channels", props.hackathhonId, roomName.split(' ').join("_").toLowerCase()), {
+                "message": "General Discussions",
+                "messageType": "message",
+                "messageCreatedAt": Timestamp.fromDate(new Date())
+            })
+
+
         }
 
     };

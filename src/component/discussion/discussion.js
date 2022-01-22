@@ -82,7 +82,7 @@ if(loading) {
                         flex:0.2
                     }}
                 >
-                    <LeftPanel sub_channels={roomList} changeRooms={changeRooms}/>
+                    <LeftPanel sub_channels={roomList} hackathhonId={hackathonId} changeRooms={changeRooms}/>
 
                 </div>
                 <div
