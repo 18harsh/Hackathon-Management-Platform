@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {makeStyles} from "@material-ui/core/styles";
 import Tabs from '../../component/tabs/tabs';
@@ -6,6 +6,10 @@ import {Input} from 'antd';
 import {Button,notification} from 'antd';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
+import {useParams} from "react-router-dom";
+import {arrayUnion, collection, doc, onSnapshot, query, updateDoc, where} from "firebase/firestore";
+import {db} from "../../firebaseConfig/firebaseConfig";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 
 
@@ -28,14 +32,50 @@ const useStyles = makeStyles({
 });
 
 export default function Submission(props) {
-
+    let {hackathonId} = useParams();
     const [repoName, setRepoName] = useState("");
     const [repoWebsite, setRepoWebsite] = useState("");
     const [projectFeature, setProjectFeature] = useState("");
 
+    const [participantId, setParticipantId] = useState("");
 
-    function handleSubmit() {
-        
+    useEffect(() => {
+
+        const auth = getAuth();
+        onAuthStateChanged(auth, async user => {
+            const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
+            const q = query(particpiapntRef, where("hackathon_email_id_creator", "==", user.email));
+
+            const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+                const hack = [];
+                querySnapshot.forEach((doc) => {
+                    hack.push({hackathons: doc.data(), hackathonId: doc.id});
+                });
+                setParticipantId(hack[0].hackathonId)
+                console.log(hack)
+               });
+        });
+
+    }, []);
+
+
+
+    async function handleSubmit() {
+
+        await updateDoc(doc(db, `hackathons/${hackathonId}/participants`, participantId), {
+            "repoName":repoName,
+            "repoWebsite": repoWebsite,
+            "projectFeature":projectFeature.html
+        }).then(data=>{
+            notification.success({
+                message: 'Project Submitted Participated',
+                // description:
+                //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                // onClick: () => {
+                //   console.log('Notification Clicked!');
+                // },
+            })
+        });
     }
 
 

@@ -130,7 +130,7 @@ export default function Tabs(props) {
                     });
                     console.log(hack)
 
-                    // const customRef = doc(db,collection(db, "hackathons", hackathonId, "participants"),hack[0].hackathonId)
+                    // const customRef = doc(db,collection(db, "hackathons", hackathonId, "organizer_page"),hack[0].hackathonId)
                     await updateDoc(doc(db,`hackathons/${hackathonId}/participants`,hack[0].hackathonId), {
                         "participant_status": true,
                         "participants": arrayUnion(user.email)
