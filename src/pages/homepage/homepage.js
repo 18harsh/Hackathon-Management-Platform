@@ -14,6 +14,9 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Finish!
 
+
+const card = ["","","","","","","","","","",""]
+
 class Homepage extends Component {
 
     handleEditorChange({ html, text }) {
@@ -37,10 +40,24 @@ class Homepage extends Component {
 
     render() {
         return (
-            <div className={css.homepage}>
-                <Hackathoncard/>
-                {/* <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} /> */}
-               </div>
+            <div className="m-5">
+            <div className={`${css.homepage} row justify-content-left`}>
+                
+                {
+                    card.map((hackathon)=>(
+                        <div 
+                        style={{
+                        //    width: '33.3%',
+                        }}
+                        className="col-4 mb-3"
+                        >
+
+                        <Hackathoncard/>
+                        </div>
+                    ))
+                }
+            </div>
+            </div>
         );
     }
 

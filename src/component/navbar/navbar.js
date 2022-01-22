@@ -102,7 +102,7 @@ class Navbar extends Component {
                         alignItems="center"
                     >
 
-                        {this.props.isAuth && <ColorButton component={NavLink} to={"user/profile"} color="inherit" style={{
+                        {this.props.isAuth && <ColorButton component={NavLink} to={"/profile"} color="inherit" style={{
                             width: "200px",
                             marginTop:"20%"
 

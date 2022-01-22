@@ -25,9 +25,9 @@ const ColorButton = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     root: {
-        width: "300px",
-        minHeight:"400px",
-        backgroundColor:"#FAEEE7",
+        width: "350px",
+        Height:"300px",
+        backgroundColor:"white",
         margin:10
     },
     bullet: {
@@ -63,7 +63,13 @@ export default function Hackathoncard() {
 
 
     return (
-        <Card className={classes.root}>
+        <Card className={`${classes.root} `}>
+            <div>
+                <img src={require('./card_default.jpg')} style={{
+                    width: '100%',
+                }}/>
+            </div>
+
             <CardContent>
                 <Typography variant="h5"  component="h2" >
                     Hackathon Name
@@ -83,7 +89,13 @@ export default function Hackathoncard() {
             </CardContent>
 
             <CardActions>
-                <ColorButton size="small">Participate</ColorButton>
+                <ColorButton size="small" className="bg-success w-75 mx-auto" style={{
+                    borderRadius: '50px',
+                }}>
+                    <span className="text-light" style={{
+                        fontSize: '18px',
+                        fontWeight: 'bold'
+                    }}>Participate Now</span></ColorButton>
             </CardActions>
 
 
