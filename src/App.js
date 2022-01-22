@@ -8,6 +8,7 @@ import * as actions from './store/actions/userAuthActions';
 import Discussions from "./component/discussion/discussion";
 import {connect} from "react-redux";
 import { Routes, Route,  } from "react-router-dom";
+import CreateHackathon from "./component/hackathon/create_hackathon/create_hackathon";
 
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
 
             </Route>
             <Route path="/discussion" element={<Discussions/>}/>
+            <Route path="/hackathon/create" element={<CreateHackathon/>}/>
           </Routes>
         </React.Fragment>
 

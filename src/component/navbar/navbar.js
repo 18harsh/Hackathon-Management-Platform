@@ -123,51 +123,6 @@ class Navbar extends Component {
             </div>
         );
 
-        // const list1 = (anchor) => (
-        //     <div
-        //         style={{
-        //             width: 250,
-        //             background: "#1a508b",
-        //             height: "100%",
-        //
-        //             color: "#fff3e6",
-        //
-        //         }}
-        //         role="presentation"
-        //         onClick={this.toggleDrawer}
-        //         onKeyDown={this.toggleDrawer}
-        //     >
-        //         <Avatar style={{
-        //             margin: "20px auto",
-        //             width: "100px",
-        //             height: "100px",
-        //             fontSize: "50px"
-        //         }}>
-        //
-        //
-        //         </Avatar>
-        //         <Divider/>
-        //         <List>
-        //
-        //
-        //             <Grid
-        //                 container
-        //                 direction="column"
-        //                 justify="center"
-        //                 alignItems="center"
-        //             >
-        //
-        //
-        //                 <ColorButton color="inherit" component={NavLink} to={"/patient/home"}>Home</ColorButton>
-        //                 <ColorButton component={NavLink} to={"/hospital/home"} color="inherit">Hospitals</ColorButton>
-        //                 <ColorButton component={NavLink} to={"/health"} color="inherit">Vaccination Centers</ColorButton>
-        //
-        //             </Grid>
-        //
-        //
-        //         </List>
-        //     </div>
-        // );
         return (
             <>
                 <AppBar position="static" style={{
@@ -190,37 +145,14 @@ class Navbar extends Component {
                     <Toolbar>
 
 
-                        {/*<Typography variant="h6" className={classes.title}>*/}
-                        {/*    News*/}
-                        {/*</Typography>*/}
                         <span className={css.Menu_Css}>
-                        {/*{["left"].map((anchor) => (*/}
-                            {/*    <React.Fragment key={anchor}>*/}
-                            {/*        <ColorButton*/}
 
-                            {/*            style={{*/}
-                            {/*                color: "white"*/}
-                            {/*            }}*/}
-                            {/*            onClick={this.toggleDrawer}*/}
-                            {/*        >*/}
-                            {/*            <MenuIcon style={{*/}
-                            {/*                width: "30px",*/}
-                            {/*                height: "40px"*/}
-                            {/*            }}/>*/}
-                            {/*        </ColorButton>*/}
-                            {/*        <Drawer*/}
-                            {/*            anchor={anchor}*/}
-                            {/*            open={this.state.anchor}*/}
-                            {/*            onClose={this.toggleDrawerClose}*/}
-                            {/*        >*/}
-                            {/*            {list1(anchor)}*/}
-                            {/*        </Drawer>*/}
-                            {/*    </React.Fragment>*/}
-                            {/*))}*/}
                         </span>
                         <span className={css.categories_Css}>
                         <ColorButton color="inherit" component={NavLink} to={"/home"}>Home</ColorButton>
-
+                        <ColorButton color="inherit" style={{
+                            width:200
+                        }} component={NavLink} to={"/hackathon/create"}>Organise Hackathon</ColorButton>
 
 
                          </span>
