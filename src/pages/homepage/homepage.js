@@ -7,6 +7,7 @@ import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 import {getAuth,  onAuthStateChanged} from "firebase/auth";
+import Hackathoncard from "../../component/hackathoncard/hackathoncard";
 
 // Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -37,6 +38,7 @@ class Homepage extends Component {
     render() {
         return (
             <div className={css.homepage}>
+                <Hackathoncard/>
                 {/* <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} /> */}
                </div>
         );
