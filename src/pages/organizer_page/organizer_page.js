@@ -81,7 +81,7 @@ export default function OrganizerPage(props) {
 
         }).then(data=>{
             notification.success({
-                message: 'User Was Added',
+                message: 'Organizer has been added successfully',
                 // description:
                 //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
                 // onClick: () => {
@@ -93,7 +93,7 @@ export default function OrganizerPage(props) {
 
     return (
         <div className={classes.root}>
-            <div className="mx-2">
+            <div className="mx-2 my-3">
                 <Search
                     placeholder="Add an Organizer"
                     allowClear

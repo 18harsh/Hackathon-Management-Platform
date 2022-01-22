@@ -98,7 +98,7 @@ export default function Hackathoncard(props) {
             <CardActions>
 
                     {
-                        props.hackathon.organiser_email_id == props?.user?.email  ? 
+                        (props.hackathon.organiser_email_id.includes(props?.user?.email)) || (props?.hackathon?.organiser_email_id == props?.user?.email)  ? 
                         <>
                         <ColorButton size="small"  component={NavLink} to={ props?.user?.email ? `/hackathon/participants/${props.hackathonId}` : `/authenticate`} className="bg-success w-75 mx-auto" style={{
                             borderRadius: '50px',
