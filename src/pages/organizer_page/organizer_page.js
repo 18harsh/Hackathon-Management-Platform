@@ -50,10 +50,10 @@ export default function OrganizerPage(props) {
 
 
     return (
-        <Card className={classes.root}>
+        <div className={classes.root}>
 
             ISME KYA KARNA HAI?
 
-        </Card>
+        </div>
     );
 }
