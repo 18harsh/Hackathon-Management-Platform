@@ -1,0 +1,23 @@
+.Menu_Css {
+    display: none;
+}
+
+.categories_Css {
+    display: block;
+}
+
+
+@media (max-width: 1050px) {
+    .categories_Css {
+        display: block;
+    }
+}
+
+@media (max-width: 750px) {
+    .categories_Css {
+        display: none;
+    }
+    .Menu_Css {
+        display: block;
+    }
+}
