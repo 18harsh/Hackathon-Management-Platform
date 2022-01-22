@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +8,14 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+
+
+
+import {db} from "../../firebaseConfig/firebaseConfig";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {arrayUnion, collection, doc, onSnapshot, query, updateDoc, where} from "firebase/firestore";
+import {useParams} from "react-router-dom";
+
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -48,11 +56,40 @@ export default function OrganizerPage(props) {
     const classes = useStyles();
 
 
+    let {hackathonId} = useParams();
+    const [participants, setParticipants] = useState("");
+  
+    useEffect(() => {
+  
+      const auth = getAuth();
+      onAuthStateChanged(auth, async user => {
+          const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
+          const q = query(particpiapntRef);
+  
+          const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+              const hack = [];
+              querySnapshot.forEach((doc) => {
+                  hack.push({hackathons: doc.data(), hackathonId: doc.id});
+              });
+              setParticipants(hack)
+             });
+      });
+  
+  
+  }, []);
+
+    console.log(participants)
 
     return (
         <div className={classes.root}>
 
-            ISME KYA KARNA HAI?
+            {
+                participants.map((participant)=>(
+                    <div key={participant.hackathonId}>
+
+                    </div>
+                ))
+            }
 
         </div>
     );

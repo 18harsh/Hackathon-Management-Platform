@@ -56,6 +56,7 @@ export default function Submission(props) {
                });
         });
 
+
     }, []);
 
 
@@ -68,7 +69,7 @@ export default function Submission(props) {
             "projectFeature":projectFeature.html
         }).then(data=>{
             notification.success({
-                message: 'Project Submitted Participated',
+                message: 'Project Submitted Successfully',
                 // description:
                 //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
                 // onClick: () => {
