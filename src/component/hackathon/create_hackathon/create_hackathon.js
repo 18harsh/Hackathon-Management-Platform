@@ -2,10 +2,11 @@ import React, { useState} from 'react';
 import {Input} from 'antd';
 import {DatePicker, Space} from 'antd';
 import 'antd/dist/antd.css';
-import {Button} from 'antd';
+import {Button,notification} from 'antd';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
 import { db } from "../../../firebaseConfig/firebaseConfig";
+import {useNavigate} from 'react-router-dom';
 import {
     collection,
     getDocs,
@@ -34,7 +35,7 @@ export default function Create_hackathon() {
     const [hackDescription, setHackDescription] = useState("");
     const hackathonCollectionRef = collection(db, "hackathons");
     const userCollection = collection(db, "users");
-
+    const navigate = useNavigate();
 
 
     function handleSubmit() {
@@ -63,6 +64,26 @@ export default function Create_hackathon() {
                 "hackName": hackName.toString(),
                 "hack_uid":docRef.id
 
+            }).then( data => {
+                notification.success({
+                    message: 'Hackathon Has been created',
+                    // description:
+                    //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                    // onClick: () => {
+                    //   console.log('Notification Clicked!');
+                    // },
+                  })
+                navigate('/home', {replace: true})
+            })
+            .catch( error => {
+                notification.error({
+                    message: 'Something went wrong',
+                    // description:
+                    //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                    // onClick: () => {
+                    //   console.log('Notification Clicked!');
+                    // },
+                  })
             });
 
         });
