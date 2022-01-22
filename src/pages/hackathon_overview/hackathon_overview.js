@@ -64,6 +64,7 @@ export default function HackathonOverview(props) {
     const [hackathon, setHackathon] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
 
+    console.log(hackathon,"////")
 
     useEffect(() => {
 

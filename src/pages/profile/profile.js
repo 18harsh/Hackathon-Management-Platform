@@ -56,7 +56,7 @@ class Profile extends Component{
                     <br/>
                     <img className={Css.imageProfile} src={this.state.photoURL === null ? "Not Found" : this.state.photoURL} alt=""/>
                     <br/>
-                    <CssTextField className={Css.textFiled} value={this.state.displayName === null ? "Not Found" : this.state.displayName} label={"Name"} />
+                    <CssTextField className={`${Css.textFiled} text-dark`} value={this.state.displayName === null ? "Not Found" : this.state.displayName} label={"Name"} />
                     <br/>
                     <CssTextField className={Css.textFiled} value={this.state.emailId === null ? "Not Found" : this.state.emailId} label={"Email ID"} />
                     <br/>

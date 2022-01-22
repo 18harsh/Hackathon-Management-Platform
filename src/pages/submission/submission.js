@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {makeStyles} from "@material-ui/core/styles";
+import Tabs from '../../component/tabs/tabs';
 
 const useStyles = makeStyles({
 
@@ -20,7 +21,9 @@ const useStyles = makeStyles({
 export default function Submission(props) {
 
 
-    return (<div className="d-flex justify-content-around pt-1">
+    return (<div className="">
+            < Tabs/>
+            
 
         </div>
     );

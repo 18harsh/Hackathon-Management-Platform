@@ -15,6 +15,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 class Navbar extends Component {
     state = {
+        photoURL:null,
         AnchorEl: null,
         right: false,
         anchor: false,
@@ -34,6 +35,22 @@ class Navbar extends Component {
         // this.props.onTryAutoSignUp();
         // console.log("Printing",this.props.user_type,
         //    );
+
+        onAuthStateChanged(auth,user => {
+            console.log(user)
+            if (user === null) {
+                this.setState({
+                    redirect:true
+                })
+            } else {
+                this.setState({
+                    photoURL:user.photoURL,
+                   
+                })
+                console.log("user", user)
+            }
+
+        })
     }
 
     handleClose = () => {
@@ -69,6 +86,8 @@ class Navbar extends Component {
         //https://colorhunt.co/palette/253250W
         // const {classes} = {...this.props};
 
+        console.log(this.state,"??????")
+
         const list = (anchor) => (
             <div
                 style={{
@@ -89,7 +108,9 @@ class Navbar extends Component {
                     width: "100px",
                     height: "100px",
                     fontSize: "20px"
-                }}>{this.props.userType}</Avatar>
+                }}
+                src={this.state.photoURL}
+                />
                 <Divider/>
                 <List>
 

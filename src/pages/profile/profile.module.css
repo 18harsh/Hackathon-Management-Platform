@@ -1,6 +1,15 @@
 
 .textFiled {
  width: 400px;
+
+}
+
+input {
+    color: black !important;  
+}
+label {
+    color: black !important;  
+   
 }
 
 .imageProfile{

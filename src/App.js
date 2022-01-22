@@ -12,6 +12,7 @@ import CreateHackathon from "./component/hackathon/create_hackathon/create_hacka
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HackathonOverview from "./pages/hackathon_overview/hackathon_overview";
 import Submission from "./pages/submission/submission";
+import User_organised_hackathons from "./pages/user_organised_hackathons/user_organised_hackathons";
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
             }/>
             <Route path="authenticate" element={<Authenticate/>}/>
             <Route path="profile" element={<Profile/>}/>
+            <Route path="hackathons/organised" element={<User_organised_hackathons/>}/>
             <Route path="hackathon" >
               <Route path=":hackathonId" element={<Hackathon/>}/>
               <Route path="overview/:hackathonId" element={<HackathonOverview/>}/>
