@@ -13,11 +13,6 @@ const { RangePicker } = DatePicker;
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 
-
-
-
-
-
 export default function Create_hackathon() {
 
     const [hackName, setHackName] = useState("");
