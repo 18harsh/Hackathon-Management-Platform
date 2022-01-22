@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,6 +9,9 @@ import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import Tabs from "../../component/tabs/tabs";
+import Hackheader from '../../component/hackheader/hackheader';
+import {useParams} from 'react-router-dom';
+
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -57,17 +60,17 @@ const useStyles = makeStyles({
 });
 
 export default function HackathonOverview(props) {
-    const [roomName, setRoomName] = React.useState("");
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
 
+    let { hackathonId } = useParams();
 
 
     return (
         <div>
-          <Tabs/>
-
-
+            <Hackheader/>   
+            <Tabs/>
+          
         </div>
     );
 }
