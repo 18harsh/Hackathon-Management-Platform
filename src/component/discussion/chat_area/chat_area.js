@@ -26,7 +26,7 @@ const ColorButton = withStyles((theme) => ({
         marginRight:"10px",
         width:"100%",
        textTransform:"none",
-
+       
     },
 }))(Button);
 
@@ -61,7 +61,7 @@ const useStyles = makeStyles({
         height:"65vh",
         backgroundColor:"#",
         margin:10,
-
+        overflow: "auto",
     },
 
 });
@@ -98,6 +98,8 @@ export default function RightPanel(props) {
 
 
     const onSearch = async value => {
+
+        if(value != ""){
         const auth = getAuth();
         onAuthStateChanged(auth,async user => {
             await addDoc(collection(db, "channels", props.hackathhonId, "general_discussions"), {
@@ -109,7 +111,12 @@ export default function RightPanel(props) {
 
             })
         });
+    }
+        // const scrollTopButton = document.getElementById('scrollTopButton');
 
+        // scrollTopButton.addEventListener('click', () => {
+        //     window.scrollTo(0, document.body.scrollHeight);
+        // });
     };
     if(loading) {
         return (
@@ -117,7 +124,7 @@ export default function RightPanel(props) {
                 <Card className={"mx-2 mt-2"}>
                     <ColorButton size="small" className="mb-2">{props.currentRoomName}</ColorButton>
                 </Card>
-                <div className={classes.root4}>
+                <div className={`${classes.root4} scrollTopButton`}>
                     {messages.map((value)=>{
                         return   <Message message={value.message} image={value.user_display_image}
                                           name={value.user_name} time={value.messageCreatedAt} />;
