@@ -16,6 +16,9 @@ export default function Discussion(props) {
     const [roomList, setRoomList] = React.useState([]);
     const [currentRoom, setCurrenRoom] = React.useState("general_discussions");
     const [currentRoomName, setCurrentRoomName] = React.useState("General Discussions");
+    const [currentChannelType, setChannelType] = React.useState("message");
+    const [subChannelId, setSubChannelId] = React.useState("");
+    const [userName, setUserName] = React.useState("");
     const [loading, setLoading] = React.useState(false);
 
     console.log(hackathonId)
@@ -34,7 +37,7 @@ export default function Discussion(props) {
                 });
                 if (hack.length !== 0) {
                     setRoomList(hack);
-
+                    setUserName(user.email)
                 }
                 console.log(hack)
 
@@ -52,9 +55,12 @@ export default function Discussion(props) {
     },[])
 
     function changeRooms(value) {
-        console.log(value.sub_channel_code_name);
+        console.log(value.channel_type);
         setCurrenRoom(value.sub_channel_code_name);
         setCurrentRoomName(value.sub_channel_name);
+        setChannelType(value.channel_type);
+        setSubChannelId(value.sub_channel_id);
+
     }
     
 
@@ -84,7 +90,7 @@ if(loading) {
                         flex:0.8
                     }}
                 >
-                    <RightPanel currentRoom={currentRoom} hackathhonId={hackathonId} currentRoomName={currentRoomName} />
+                     <RightPanel currentRoom={currentRoom} userName={userName} subChannelId={subChannelId} channelType={currentChannelType} hackathhonId={hackathonId} currentRoomName={currentRoomName} />
 
                 </div>
 

@@ -13,6 +13,7 @@ import { AudioOutlined } from '@ant-design/icons';
 import {addDoc, collection,orderBy, onSnapshot, query, Timestamp} from "firebase/firestore";
 import {db} from "../../../firebaseConfig/firebaseConfig";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
+import VideoAudio from "../../video_audio/VideoAudio";
 
 const { Search } = Input;
 
@@ -74,7 +75,7 @@ export default function RightPanel(props) {
     const [messages, setMessages] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     useEffect(() => {
-        if(props.currentRoomName !== null) {
+        if(props.channelType === "message") {
 
 
             const particpiapntRef = collection(db, "channels", props.hackathhonId, props.currentRoom);
@@ -93,6 +94,8 @@ export default function RightPanel(props) {
 
             });
             setLoading(true);
+        } else if (props.channelType === "media") {
+
         }
     }, []);
 
@@ -124,8 +127,12 @@ export default function RightPanel(props) {
                 <Card className={"mx-2 mt-2"}>
                     <ColorButton size="small" className="mb-2">{props.currentRoomName}</ColorButton>
                 </Card>
+                {props.channelType === 'media' && props.subChannelId !==''?<VideoAudio meetingId={props.subChannelId} userName={props.userName}/>:<div/>
+
+                }
+
                 <div className={`${classes.root4} scrollTopButton`}>
-                    {messages.map((value)=>{
+                    {props.channelType === "message" && messages.map((value)=>{
                         return   <Message message={value.message} image={value.user_display_image}
                                           name={value.user_name} time={value.messageCreatedAt} />;
                     })}
