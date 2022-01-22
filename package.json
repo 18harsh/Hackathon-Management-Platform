@@ -28,6 +28,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
+    "@octokit/core": "^3.5.1",
     "redux-thunk": "^2.4.1",
     "@videosdk.live/rtc-js-prebuilt": "^0.1.26",
     "web-vitals": "^2.1.4"

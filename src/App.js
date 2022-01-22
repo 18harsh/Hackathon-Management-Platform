@@ -14,6 +14,7 @@ import HackathonOverview from "./pages/hackathon_overview/hackathon_overview";
 import Submission from "./pages/submission/submission";
 import User_organised_hackathons from "./pages/user_organised_hackathons/user_organised_hackathons";
 import OrganizerPage from "./pages/organizer_page/organizer_page";
+import Github_data from "./component/github/github_data";
 
 class App extends Component {
 
@@ -45,8 +46,9 @@ class App extends Component {
               <Route path="discussion/:hackathonId" element={<Discussion/>}/>
               <Route path="submission/:hackathonId" element={<Submission/>}/>
               <Route path="participants/:hackathonId" element={<OrganizerPage/>}/>
-            </Route>
 
+            </Route>
+            <Route path="github/" element={<Github_data/>}/>
             <Route path="hackathon/create" element={<CreateHackathon/>}/>
           </Routes>
         </React.Fragment>

@@ -130,7 +130,7 @@ export default function RightPanel(props) {
         if(value != ""){
         const auth = getAuth();
         onAuthStateChanged(auth,async user => {
-            await addDoc(collection(db, "channels", props.hackathhonId, "general_discussions"), {
+            await addDoc(collection(db, "channels", props.hackathhonId, props.currentRoom), {
                 "message":value,
                 "messageType": "message",
                 "messageCreatedAt": Timestamp.fromDate(new Date()),
