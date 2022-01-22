@@ -108,6 +108,14 @@ class Navbar extends Component {
 
                         }}>Profile</ColorButton> }
 
+                        {this.props.isAuth && <ColorButton component={NavLink} to={"/hackathons/organised"} color="inherit" style={{
+                            width: "200px",
+                            marginTop:"20%"
+
+                        }}>Hackathons Organised</ColorButton> }
+
+
+
                         {this.props.isAuth && <ColorButton onClick={()=>this.loggingOutUser()} color="inherit" style={{
                             width: "200px",
                             marginTop:"20%"

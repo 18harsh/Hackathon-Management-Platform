@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 
-export default function Hackheader() {
+export default function Hackheader(props) {
 
   return (
   <div>
@@ -18,11 +18,11 @@ export default function Hackheader() {
       }}
     >
     <div className="bg-success align-items-center text-light p-1">
-      <BiTime size={30}/> Ends on 31th Jan'22 09:00 PM (India Standard Time)
+      <BiTime size={30}/> Ends on {props.hackathon.hackEnd.toDate().toDateString()+" "+props.hackathon.hackEnd.toDate().toLocaleTimeString()+" Indian Standard Time"}
     </div>
     <h3 className="text-light mt-1"
      
-    >Data Sprint 62 - Weather Recognition</h3>
+    >{props.hackathon.hackName}</h3>
     </div>
 
     
