@@ -37,7 +37,7 @@ class Homepage extends Component {
     render() {
         return (
             <div className={css.homepage}>
-                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />
+                {/* <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} /> */}
                </div>
         );
     }
@@ -63,3 +63,5 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
 // export default Homepage;
+
+
