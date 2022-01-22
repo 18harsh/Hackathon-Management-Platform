@@ -10,7 +10,6 @@ import Drawer from "@material-ui/core/Drawer";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Grid from '@material-ui/core/Grid';
 import css from './Navbar.module.css'
-import firebase from "../../firebaseConfig/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 

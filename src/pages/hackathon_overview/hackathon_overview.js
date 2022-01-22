@@ -1,23 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import {TextField} from "@material-ui/core";
-import {NavLink} from "react-router-dom";
 import Tabs from "../../component/tabs/tabs";
 import {Divider} from 'antd';
-
 import Hackheader from '../../component/hackheader/hackheader';
 import {useParams} from 'react-router-dom';
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-
 import {db} from '../../firebaseConfig/firebaseConfig';
 import {addDoc, collection, doc, arrayUnion, query, where, onSnapshot, updateDoc} from "firebase/firestore";
-import ReactMarkdown from 'react-markdown'
 
 const ColorButton = withStyles((theme) => ({
     root: {

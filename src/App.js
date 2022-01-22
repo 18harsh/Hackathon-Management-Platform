@@ -11,6 +11,7 @@ import { Routes, Route,  } from "react-router-dom";
 import CreateHackathon from "./component/hackathon/create_hackathon/create_hackathon";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HackathonOverview from "./pages/hackathon_overview/hackathon_overview";
+import Submission from "./pages/submission/submission";
 
 class App extends Component {
 
@@ -38,6 +39,7 @@ class App extends Component {
               <Route path=":hackathonId" element={<Hackathon/>}/>
               <Route path="overview/:hackathonId" element={<HackathonOverview/>}/>
               <Route path="discussion/:hackathonId" element={<Discussion/>}/>
+              <Route path="submission/:hackathonId" element={<Submission/>}/>
             </Route>
 
             <Route path="hackathon/create" element={<CreateHackathon/>}/>

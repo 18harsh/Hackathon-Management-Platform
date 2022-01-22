@@ -194,7 +194,7 @@ export default function Tabs(props) {
         <div>
                 <Button color="inherit" component={NavLink} to={`/hackathon/overview/${hackathonId}`}>Overview</Button>
                 <Button color="inherit" component={NavLink} to={`/hackathon/discussion/${hackathonId}`}>Discussion</Button>
-                <Button color="inherit" component={NavLink} to={`/hackathon/discussion/${hackathonId}`}>Submission</Button>
+                <Button color="inherit" component={NavLink} to={`/hackathon/submission/${hackathonId}`}>Submission</Button>
 
         </div>
         <div>
