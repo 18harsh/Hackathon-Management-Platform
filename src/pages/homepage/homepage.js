@@ -23,13 +23,13 @@ class Homepage extends Component {
 
     componentDidMount() {
         const auth = getAuth();
-        // onAuthStateChanged(auth,user => {
-        //
-        //     this.setState({
-        //         isAuth: !!user,
-        //     })
-        //
-        // })
+        onAuthStateChanged(auth,user => {
+
+            this.setState({
+                isAuth: !!user,
+            })
+
+        })
         this.props.onTryAutoSignUp()
         console.log(auth.currentUser)
     }

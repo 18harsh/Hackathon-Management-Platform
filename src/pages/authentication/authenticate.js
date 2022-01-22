@@ -1,11 +1,10 @@
 import React, {Component,} from 'react';
 import css from './auth.module.css';
 // import app from "firebase/app";
-import firebaseApp from "../../firebaseConfig/firebaseConfig";
 import * as actions from "../../store/actions/userAuthActions";
 import {connect} from "react-redux";
 import {getAuth, GithubAuthProvider,setPersistence,browserSessionPersistence , onAuthStateChanged, signInWithPopup} from "firebase/auth";
-
+import { db } from "../../firebaseConfig/firebaseConfig";
 import { doc, setDoc,getFirestore } from "firebase/firestore";
 import GithubButton from 'react-github-login-button'
 
@@ -34,7 +33,7 @@ class Authenticate extends Component {
     }
 
     setUserData = async (email, displayName, githubId, uid) => {
-        const db = getFirestore(firebaseApp.firestore);
+
         console.log(db)
         await setDoc(doc(db, "users", uid), {
             "displayName": displayName,
