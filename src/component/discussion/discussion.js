@@ -1,37 +1,44 @@
-import React,{Component} from "react";
-import * as actions from "../../store/actions/userAuthActions";
-import {connect} from "react-redux";
+import React,{useEffect} from "react";
 
-
+import {NavLink,useParams} from 'react-router-dom';
 import 'react-markdown-editor-lite/lib/index.css';
 import {getAuth,  onAuthStateChanged} from "firebase/auth";
-
 import LeftPanel from "./left_panel/left_panel";
 import RightPanel from "./chat_area/chat_area";
-
-class Discussions extends Component {
-
-    handleEditorChange({ html, text }) {
-        console.log('handleEditorChange', html, text);
-    }
+import Tabs from "../tabs/tabs";
 
 
-    componentDidMount() {
+export default function Discussion(props) {
+
+    let { hackathonId } = useParams();
+
+    console.log(hackathonId)
+
+    useEffect(()=>{
         const auth = getAuth();
-        // onAuthStateChanged(auth,user => {
-        //
-        //     this.setState({
-        //         isAuth: !!user,
-        //     })
-        //
-        // })
-        this.props.onTryAutoSignUp()
+        onAuthStateChanged(auth,user => {
+
+            this.setState({
+                isAuth: !!user,
+            })
+
+        })
+
         console.log(auth.currentUser)
-    }
+    })
 
 
-    render() {
+
+
+
+
         return (
+            <div style={{
+                display:"flex",
+                flexDirection:"column"
+            }}>
+                <Tabs/>
+
             <div style={{
                 display:"flex",
                 alignItems:"stretch",
@@ -39,32 +46,16 @@ class Discussions extends Component {
                 height:"100%",
                 width:"100%"
             }}>
+
                <LeftPanel></LeftPanel>
                 <RightPanel/>
             </div>
+            </div>
         );
-    }
+
 
 }
 
-const mapStateToProps = state => {
-
-    return {
-        isAuth: state.user.refreshToken !== null,
-        userType: state.user.userType,
-        userId:state.user.userId,
-        emailId:state.user.emailId
-
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onTryAutoSignUp: () => dispatch(actions.authCheckState()),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Discussions);
 // export default Homepage;
 
 // <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />

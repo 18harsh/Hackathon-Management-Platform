@@ -5,11 +5,12 @@ import Hackathon from './pages/hackathon/index';
 import Profile from './pages/profile/profile'
 import Authenticate from "./pages/authentication/authenticate";
 import * as actions from './store/actions/userAuthActions';
-import Discussions from "./component/discussion/discussion";
+import Discussion from "./component/discussion/discussion";
 import {connect} from "react-redux";
 import { Routes, Route,  } from "react-router-dom";
 import CreateHackathon from "./component/hackathon/create_hackathon/create_hackathon";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HackathonOverview from "./pages/hackathon_overview/hackathon_overview";
 
 class App extends Component {
 
@@ -35,8 +36,8 @@ class App extends Component {
             <Route path="profile" element={<Profile/>}/>
             <Route path="hackathon" >
               <Route path=":hackathonId" element={<Hackathon/>}/>
-              <Route path="overview/:hackathonId" element={<Discussions/>}/>
-              <Route path="discussion/:hackathonId" element={<Discussions/>}/>
+              <Route path="overview/:hackathonId" element={<HackathonOverview/>}/>
+              <Route path="discussion/:hackathonId" element={<Discussion/>}/>
             </Route>
 
             <Route path="hackathon/create" element={<CreateHackathon/>}/>
