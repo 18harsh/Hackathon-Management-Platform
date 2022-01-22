@@ -73,9 +73,14 @@ export default function Hackathoncard(props) {
             </div>
 
             <CardContent>
-                <Typography variant="h4"  component="h2" >
+                <a  href={props?.user?.email ? `/hackathon/overview/${props.hackathonId}` : `/authenticate`} style={{
+                    textDecoration:'none'
+                }}>
+                <Typography  variant="h4"  component="h2" >
+
                     {props.hackathon.hackName}
                 </Typography>
+                </a>
                 <Typography variant="h6" component="h2">
                     Start Date
                 </Typography>
@@ -95,7 +100,7 @@ export default function Hackathoncard(props) {
                     {
                         props.hackathon.organiser_email_id == props?.user?.email  ? 
                         <>
-                        <ColorButton size="small"  component={NavLink} to={ props?.user?.email ? `/hackathon/overview/${props.hackathonId}` : `/authenticate`} className="bg-success w-75 mx-auto" style={{
+                        <ColorButton size="small"  component={NavLink} to={ props?.user?.email ? `/hackathon/participants/${props.hackathonId}` : `/authenticate`} className="bg-success w-75 mx-auto" style={{
                             borderRadius: '50px',
                         }}>
                          <span className="text-light" style={{

@@ -45,7 +45,6 @@ const useStyles = makeStyles({
 });
 
 export default function OrganizerPage(props) {
-    const [roomName, setRoomName] = React.useState("");
     const classes = useStyles();
 
 
@@ -53,13 +52,7 @@ export default function OrganizerPage(props) {
     return (
         <Card className={classes.root}>
 
-
-            {props.sub_channels.map((value)=>{
-                return <ColorButton onClick={()=>props.changeRooms(value)} style={{
-                    border: '0px',
-
-                }} size="small">{value.sub_channel_name}</ColorButton>
-            })}
+            ISME KYA KARNA HAI?
 
         </Card>
     );
