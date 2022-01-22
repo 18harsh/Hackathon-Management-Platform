@@ -6,6 +6,8 @@ import {getAuth,  onAuthStateChanged} from "firebase/auth";
 import LeftPanel from "./left_panel/left_panel";
 import RightPanel from "./chat_area/chat_area";
 import Tabs from "../tabs/tabs";
+import {collection, onSnapshot, query, where} from "firebase/firestore";
+import {db} from "../../firebaseConfig/firebaseConfig";
 
 
 export default function Discussion(props) {
@@ -18,11 +20,27 @@ export default function Discussion(props) {
         const auth = getAuth();
         onAuthStateChanged(auth,user => {
 
-            this.setState({
-                isAuth: !!user,
-            })
+            const particpiapntRef = collection(db, "channels");
+            const q = query(particpiapntRef);
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const hack = [];
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.data)
+                    hack.push(doc.data());
+                });
+                if (hack.length !== 0) {
+
+
+                }
+                console.log(hack)
+
+            });
 
         })
+
+
+
+
 
         console.log(auth.currentUser)
     })
