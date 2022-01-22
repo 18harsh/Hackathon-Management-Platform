@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import {TextField} from "@material-ui/core";
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import {Divider} from 'antd';
+import {Divider, notification} from 'antd';
 
 
 
 import {db} from "../../firebaseConfig/firebaseConfig";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-import {arrayUnion, collection, doc, onSnapshot, query, updateDoc, where} from "firebase/firestore";
+import {arrayUnion, collection, doc, onSnapshot, query, setDoc, Timestamp, updateDoc, where} from "firebase/firestore";
 import {useParams} from "react-router-dom";
-
+import {Search} from "@material-ui/icons";
+import { Input, Space } from 'antd';
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -55,8 +49,7 @@ const useStyles = makeStyles({
 
 export default function OrganizerPage(props) {
     const classes = useStyles();
-
-
+    const { Search } = Input;
     let {hackathonId} = useParams();
     const [participants, setParticipants] = useState();
   
@@ -80,9 +73,36 @@ export default function OrganizerPage(props) {
   }, []);
 
     console.log(participants)
+    const onSearch = async value => {
+        console.log(value)
+        const docRef = await updateDoc(doc(db, `hackathons`, hackathonId), {
+
+            "organiser_email_id":arrayUnion(value),
+
+        }).then(data=>{
+            notification.success({
+                message: 'User Was Added',
+                // description:
+                //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                // onClick: () => {
+                //   console.log('Notification Clicked!');
+                // },
+            })
+        });
+    };
 
     return (
         <div className={classes.root}>
+            <div className="mx-2">
+                <Search
+                    placeholder="Add an Organizer"
+                    allowClear
+                    enterButton="Add"
+                    size="large"
+                    onSearch={onSearch}
+                />
+
+            </div>
             <div className="mx-2">
                 <h4>
                 Total participants: {participants?.length}

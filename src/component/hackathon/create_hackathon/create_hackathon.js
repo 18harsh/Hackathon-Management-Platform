@@ -14,6 +14,7 @@ import {
     updateDoc,
     deleteDoc,
     doc,
+    arrayUnion,
     Timestamp, setDoc,
 
 } from "firebase/firestore";
@@ -56,7 +57,7 @@ export default function Create_hackathon() {
                 "hackathon_id":id,
                 "hackName": hackName.toString(),
                 "organiser_name": user.reloadUserInfo.screenName,
-                "organiser_email_id": user.email.toString(),
+                "organiser_email_id":arrayUnion( user.email.toString()),
                 "website": website.toString(),
                 "registrationDate": Timestamp.fromDate(registrationDate._d),
                 "hackStart": Timestamp.fromDate(hackStartEnd[0]._d),

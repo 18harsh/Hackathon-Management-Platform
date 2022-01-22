@@ -13,7 +13,7 @@ export default function VideoAudio({meetingIdVar,userName}) {
             apiKey: apiKey,
 
             containerId: null,
-            redirectOnLeave: "http:",
+            redirectOnLeave: "http://www.videosdk.live/",
 
             micEnabled: true,
             webcamEnabled: true,
