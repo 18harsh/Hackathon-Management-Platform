@@ -37,7 +37,7 @@ export default function Tabs(props) {
     const [userParticipation, setUserParticipation] = React.useState(false);
     const auth = getAuth();
 
-    useEffect(()=>{
+    function getUserParticipation(){
         onAuthStateChanged(auth,user => {
             console.log(user.email)
             const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
@@ -47,7 +47,7 @@ export default function Tabs(props) {
                 querySnapshot.forEach((doc) => {
                     hack.push({hackathons: doc.data(),hackathonId:doc.id});
                 });
-                if (hack !== null) {
+                if (hack.length !== 0) {
                     setUserParticipation(true)
                 }
                 console.log(hack)
@@ -55,7 +55,11 @@ export default function Tabs(props) {
             });
 
         })
+    }
 
+    useEffect(()=>{
+
+        getUserParticipation();
 
 
     },[])
@@ -111,6 +115,7 @@ export default function Tabs(props) {
                             // },
                         })
                     });
+                getUserParticipation();
             } else if (number === 2) {
                 const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
                 const q = query(particpiapntRef, where("team_id", "==", teamId));
@@ -135,15 +140,16 @@ export default function Tabs(props) {
                         "participant_status": true,
 
                     }).then(data => {
+
                         notification.success({
-                            message: 'Hackathon Has been created',
+                            message: 'Hackathon Participated',
                             // description:
                             //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
                             // onClick: () => {
                             //   console.log('Notification Clicked!');
                             // },
                         })
-                        navigate('/home', {replace: true})
+                        getUserParticipation();
                     })
                         .catch(error => {
                             notification.error({
@@ -167,10 +173,10 @@ export default function Tabs(props) {
             left: `55%`,
             transform: `translate(-40%, -55%)`,
         }} className={classes.paper}>
-            <h2 id="simple-modal-title">Join as A Team</h2>
+            <h2 id="simple-modal-title">Join Solo</h2>
             <ColorButton className="bg-success w-100 ml-auto" style={{
                 borderRadius: '50px',
-            }} size="small" onClick={()=>handleSubmit(1)}>Join a Team</ColorButton>
+            }} size="small" onClick={()=>handleSubmit(1)}>Join Solo</ColorButton>
             <h3 id="simple-modal-title">or</h3>
             <h3 id="simple-modal-title">Enter A Team</h3>
             <TextField id="filled-basic" label="Filled" onChange={(value)=>{
@@ -192,7 +198,7 @@ export default function Tabs(props) {
 
         </div>
         <div>
-            {userParticipation ? <ColorButton size="small" onClick={()=>handleOpen()} className="bg-success w-100 ml-auto" style={{
+            {userParticipation ? <ColorButton size="small"  className="bg-success w-100 ml-auto" style={{
                 borderRadius: '50px',
             }}
             >

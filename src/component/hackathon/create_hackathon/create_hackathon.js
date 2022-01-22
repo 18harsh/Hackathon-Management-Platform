@@ -14,7 +14,7 @@ import {
     updateDoc,
     deleteDoc,
     doc,
-    Timestamp,
+    Timestamp, setDoc,
 
 } from "firebase/firestore";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
@@ -35,7 +35,7 @@ export default function Create_hackathon() {
     const [hackDescription, setHackDescription] = useState("");
     const hackathonCollectionRef = collection(db, "hackathons");
     const userCollection = collection(db, "users");
-    const channels = collection(db, "channels");
+    const channelRef = collection(db, "channels");
     const navigate = useNavigate();
 
 
@@ -51,10 +51,11 @@ export default function Create_hackathon() {
             // const hackathons = await collection(db, 'hackathons',uid);
             // console.log(uid)
             var id =  doc(hackathonCollectionRef).id
-            await addDoc(doc(db,`hackathons/${id}`),{
+            console.log(id);
+            const docRef = await setDoc(doc(db,`hackathons`,id),{
                 "hackathon_id":id,
                 "hackName": hackName.toString(),
-                "organiser_name": user.displayName.toString(),
+                "organiser_name": user.reloadUserInfo.screenName,
                 "organiser_email_id": user.email.toString(),
                 "website": website.toString(),
                 "registrationDate": Timestamp.fromDate(registrationDate._d),
@@ -62,24 +63,48 @@ export default function Create_hackathon() {
                 "hackEnd": Timestamp.fromDate(hackStartEnd[1]._d),
                 "hackDescription": hackDescription.html.toString(),
             });
-
-            await addDoc(doc(db,`channels/${id}`),{
-                "hackathon_id":id,
+            await setDoc(doc(db,`channels`,id),{
+                "channel_id":id.toString(),
                 "hackName": hackName.toString(),
-                "organiser_name": user.displayName.toString(),
+                "organiser_name": user.reloadUserInfo.screenName,
                 "organiser_email_id": user.email.toString(),
-                "website": website.toString(),
-                "registrationDate": Timestamp.fromDate(registrationDate._d),
-                "hackStart": Timestamp.fromDate(hackStartEnd[0]._d),
-                "hackEnd": Timestamp.fromDate(hackStartEnd[1]._d),
-                "hackDescription": hackDescription.html.toString(),
-            });
+            }).then(data => {
+                console.log(data)
+            })
+            var id2 =  doc(hackathonCollectionRef).id
+            await addDoc(collection(db, "channels", id, "sub_channels_list"), {
+                "sub_channel_id": id2,
+                "sub_channel_name": "General Discussions",
+                "sub_channel_code_name":"general_discussions",
+                "channel_type": "message"
+            })
+            await addDoc(collection(db, "channels", id, "sub_channels_list"), {
+                "sub_channel_id": id2,
+                "sub_channel_name": "media",
+                "sub_channel_code_name":"audio_video",
+                "channel_type": "media"
+            })
 
-            await addDoc(collection(db,"users",user.uid,"hackathons_organised"),{
+
+            await addDoc(collection(db, "channels", id, "general_discussions"), {
+                "message": "General Discussions",
+                "messageType": "message",
+                "messageCreatedAt":Timestamp.fromDate(new Date())
+            })
+
+            await addDoc(collection(db, "channels", id, "audio_video"), {
+                "message": "General Discussions",
+                "messageType": "message",
+                "messageCreatedAt":Timestamp.fromDate(new Date())
+            })
+
+
+
+            await addDoc(collection(db, "users", user.uid, "hackathons_organised"), {
                 "hackName": hackName.toString(),
-                "hack_uid":id
+                "hack_uid": id.toString()
 
-            }).then( data => {
+            }).then(data => {
                 notification.success({
                     message: 'Hackathon Has been created',
                     // description:
@@ -87,19 +112,21 @@ export default function Create_hackathon() {
                     // onClick: () => {
                     //   console.log('Notification Clicked!');
                     // },
-                  })
+                })
                 navigate('/home', {replace: true})
             })
-            .catch( error => {
-                notification.error({
-                    message: 'Something went wrong',
-                    // description:
-                    //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-                    // onClick: () => {
-                    //   console.log('Notification Clicked!');
-                    // },
-                  })
-            });
+                .catch(error => {
+                    notification.error({
+                        message: 'Something went wrong',
+                        // description:
+                        //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                        // onClick: () => {
+                        //   console.log('Notification Clicked!');
+                        // },
+                    })
+                });
+
+
 
         });
     }
