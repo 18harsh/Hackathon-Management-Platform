@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import ColorButton from '../button/button'
-import {NavLink} from 'react-router-dom';
+import {NavLink,useParams} from 'react-router-dom';
+import Button from "@material-ui/core/Button";
 
+export default function Tabs(props) {
+    let { hackathonId } = useParams();
 
-export default class Tabs extends Component {
-  render() {
     return (<div>
         <div>
-                <ColorButton color="inherit" component={NavLink} to={'/overview'}>Overview</ColorButton>
-                <ColorButton color="inherit" component={NavLink} to={'/hackathon/discussion'}>Discussion</ColorButton>
+                <Button color="inherit" component={NavLink} to={`/overview/${hackathonId}`}>Overview</Button>
+                <Button color="inherit" component={NavLink} to={`/discussion/${hackathonId}`}>Discussion</Button>
 
         </div>
-    </div>);
-  }
+        </div>
+        );
+
 }

@@ -25,17 +25,18 @@ class App extends Component {
           <Navbar {...this.props} NavbarTitle={"HackDev"} />
           <Routes>
             {/*<Redirect from="/" to="/home" exact/>*/}
-            <Route path="/" element={
+            <Route  path="/" element={
               <Homepage/>
             }/>
-            <Route path="home" element={
+            <Route index  path="home" element={
               <Homepage/>
             }/>
             <Route path="authenticate" element={<Authenticate/>}/>
             <Route path="profile" element={<Profile/>}/>
-            <Route path="hackathon" element={<Hackathon/>}>
-              <Route path="overview" element={<Discussions/>}/>
-              <Route path="discussion" element={<Discussions/>}/>
+            <Route path="hackathon" >
+              <Route path=":hackathonId" element={<Hackathon/>}/>
+              <Route path="overview/:hackathonId" element={<Discussions/>}/>
+              <Route path="discussion/:hackathonId" element={<Discussions/>}/>
             </Route>
 
             <Route path="hackathon/create" element={<CreateHackathon/>}/>

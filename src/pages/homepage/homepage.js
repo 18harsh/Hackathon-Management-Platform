@@ -45,13 +45,13 @@ class Homepage extends Component {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const hack = [];
             querySnapshot.forEach((doc) => {
-                hack.push(doc.data());
+                hack.push({hackathons: doc.data(),hackathonId:doc.id});
             });
             this.setState({
                 hackathons:hack 
             })
 
-            console.log("Current cities in CA: ", hack);
+
         });
         this.props.onTryAutoSignUp()
         console.log(auth.currentUser)
@@ -72,7 +72,7 @@ class Homepage extends Component {
                         className="col-4 mb-3"
                         >
 
-                        <Hackathoncard hackathon={hackathon} user={this.state.auth}/>
+                        <Hackathoncard hackathon={hackathon.hackathons} hackathonId={hackathon.hackathonId} user={this.state.auth}/>
                         </div>
                     ))
                 }

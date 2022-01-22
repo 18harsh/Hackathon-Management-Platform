@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
+import {NavLink} from "react-router-dom";
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -60,7 +61,7 @@ export default function Hackathoncard(props) {
     // getModalStyle is not a pure function, we roll the style only on the first render
 
 
-    console.log(props)
+
     return (
         <Card className={`${classes.root} `}>
             <div>
@@ -88,30 +89,37 @@ export default function Hackathoncard(props) {
             </CardContent>
 
             <CardActions>
-                <ColorButton size="small" className="bg-success w-75 mx-auto" style={{
-                    borderRadius: '50px',
-                }}>
+
                     {
                         props.hackathon.organiser_email_id == props.user.email ? 
                         <>
+                        <ColorButton size="small" className="bg-success w-75 mx-auto" style={{
+                            borderRadius: '50px',
+                        }}>
                          <span className="text-light" style={{
                         fontSize: '18px',
                         fontWeight: 'bold'
                     }}>
                         You are Host
                         </span>
-                        </>:<>
+                        </ColorButton>
+                        </>
+                            :<>
+                            <ColorButton size="small" component={NavLink} to={`/hackathon/${props.hackathonId}`} className="bg-success w-75 mx-auto" style={{
+                                borderRadius: '50px',
+                            }}>
                         <span className="text-light" style={{
                         fontSize: '18px',
                         fontWeight: 'bold'
                     }}>
                         Participate Now
                         </span>
+                            </ColorButton>
                         </>
 
                     }
                    
-                </ColorButton>
+
             </CardActions>
 
 
