@@ -6,7 +6,7 @@ import css from './homepage.module.css'
 
 import {getAuth,  onAuthStateChanged} from "firebase/auth";
 import Tabs from "../../component/tabs/tabs";
-import {  } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 class Hackathon extends Component {
     
