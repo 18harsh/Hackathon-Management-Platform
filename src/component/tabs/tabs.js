@@ -35,6 +35,8 @@ export default function Tabs(props) {
     const [open, setOpen] = React.useState(false);
     const [teamId, setTeamID] = React.useState("");
     const [userParticipation, setUserParticipation] = React.useState(false);
+    const [teamInfo, setTeamInfo] = React.useState();
+
     const auth = getAuth();
 
     function getUserParticipation(){
@@ -49,8 +51,9 @@ export default function Tabs(props) {
                 });
                 if (hack.length !== 0) {
                     setUserParticipation(true)
+                    setTeamInfo(hack)
                 }
-                console.log(hack)
+                console.log(hack,">>>>>>>>>>>>" )
 
             });
 
@@ -96,7 +99,7 @@ export default function Tabs(props) {
 
                 }).then( data => {
                     notification.success({
-                        message: 'Hackathon Has been created',
+                        message: 'Team Has been created',
                         // description:
                         //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
                         // onClick: () => {
@@ -206,7 +209,7 @@ export default function Tabs(props) {
                             fontSize: '12px',
                             fontWeight: 'bold'
                         }}>
-You Have Participated Already                        </span>
+You Have Already Participated in Team id: {teamInfo?.length >0 && teamInfo[0]?.hackathons?.team_id}                 </span>
             </ColorButton>: <ColorButton size="small" onClick={()=>handleOpen()} className="bg-success w-100 ml-auto" style={{
                 borderRadius: '50px',
             }}
