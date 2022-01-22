@@ -27,7 +27,7 @@ export default function Discussion(props) {
         console.log(auth.currentUser)
     })
 
-
+    
 
 
 
@@ -40,15 +40,27 @@ export default function Discussion(props) {
                 <Tabs/>
 
             <div style={{
-                display:"flex",
-                alignItems:"stretch",
-                flexDirection:"row",
-                height:"100%",
-                width:"100%"
+                display:"flex"
             }}>
 
-               <LeftPanel></LeftPanel>
+            <div
+                style={{
+                    flex:0.2
+                }}
+            >
+                <LeftPanel/>
+                
+            </div>
+            <div
+                style={{
+                    flex:0.8
+                }}
+            >
                 <RightPanel/>
+                
+            </div>
+               
+                
             </div>
             </div>
         );

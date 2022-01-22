@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -25,9 +26,9 @@ const ColorButton = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     root: {
-        width: "25%",
-        minHeight:"800px",
-        backgroundColor:"#FAEEE7",
+        overflow: 'auto',
+        height:"82vh",
+        backgroundColor:"white",
         margin:10
     },
     paper: {
@@ -82,15 +83,28 @@ export default function LeftPanel() {
 
     return (
         <Card className={classes.root}>
-            <CardActions>
-                <ColorButton size="small" onClick={handleOpen}>+</ColorButton>
+            <CardActions className="align-items-center" style={{
+                padding: '4px !important'
+            }}>
+                <ColorButton size="small" onClick={handleOpen} 
+                    style={{
+                        outline: 'none',
+                    }}
+                >
+                    <AiOutlinePlusCircle size={27}/>
+                    <h5 className="m-1">Create New Room</h5>
+                </ColorButton>
+
             </CardActions>
-            <CardActions>
-                <ColorButton size="small">#announcments</ColorButton>
-            </CardActions>
-            <CardActions>
-                <ColorButton size="small">#announcments</ColorButton>
-            </CardActions>
+            
+                <ColorButton style={{
+                    border: '0px',
+
+                }} size="small">#announcments</ColorButton>
+                <ColorButton style={{
+                    border: '0px',
+
+                }} size="small">#announcments</ColorButton>
 
             <Modal
                 open={open}

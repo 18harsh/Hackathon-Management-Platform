@@ -190,11 +190,11 @@ export default function Tabs(props) {
 
 
 
-    return (<div className="d-flex justify-content-around">
+    return (<div className="d-flex justify-content-around pt-1">
         <div>
                 <Button color="inherit" component={NavLink} to={`/hackathon/overview/${hackathonId}`}>Overview</Button>
                 <Button color="inherit" component={NavLink} to={`/hackathon/discussion/${hackathonId}`}>Discussion</Button>
-                <Button color="inherit" component={NavLink} to={`/hackathon/discussion/${hackathonId}`}>Notebook</Button>
+                <Button color="inherit" component={NavLink} to={`/hackathon/discussion/${hackathonId}`}>Submission</Button>
 
         </div>
         <div>

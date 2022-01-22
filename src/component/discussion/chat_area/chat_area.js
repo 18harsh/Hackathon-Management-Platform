@@ -8,6 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import CssTextField from "../../TextField/TextField";
 import Message from "../messages/message";
 
+import { Input, Space } from 'antd';
+import { AudioOutlined } from '@ant-design/icons';
+
+const { Search } = Input;
+
+
 const ColorButton = withStyles((theme) => ({
     root: {
         color: '#325288 !important',
@@ -25,17 +31,14 @@ const ColorButton = withStyles((theme) => ({
 const useStyles = makeStyles({
     root: {
         display:"flex",
-
-        justifyContent:"space-between",
         flexDirection:"column",
-        width: "100%",
-        minHeight:"800px",
-        backgroundColor:"#FAEEE7",
-        margin:10
+        // minHeight:"100vh",
+        margin:'10px',
+
     },
     root2: {
         width: "98%",
-        minHeight:"50px",
+        height:"45px",
         backgroundColor:"#",
         margin:10,
         border:"1px solid #325288",
@@ -43,7 +46,6 @@ const useStyles = makeStyles({
         alignItems:"flex-start"
     },
     root3: {
-        width: "98%",
         minHeight:"50px",
         backgroundColor:"#",
         margin:10,
@@ -53,15 +55,16 @@ const useStyles = makeStyles({
     root4: {
         display:"flex",
         flexDirection:"column",
-        width: "98%",
-        minHeight:"700px",
+        height:"65vh",
         backgroundColor:"#",
         margin:10,
-        border:"1px solid #325288",
 
     },
 
 });
+
+const onSearch = value => console.log(value);
+
 
 export default function RightPanel() {
     const classes = useStyles();
@@ -69,18 +72,22 @@ export default function RightPanel() {
 
     return (
         <Card className={classes.root}>
-            <Card className={classes.root2}>
-                <CardActions>
-                    <ColorButton size="small">#announcments</ColorButton>
-                </CardActions>
+            <Card className={"mx-2 mt-2"}>
+                    <ColorButton size="small" className="mb-2">#announcments</ColorButton>
             </Card>
-            <Card className={classes.root4}>
+            <div className={classes.root4}>
                 <Message message={"Hello"} type={"1"}/>
                 <Message message={"Hello"} type={"2"}/>
-            </Card>
-            <Card className={classes.root3}>
-
-            </Card>
+            </div>
+            <div className="p-2">
+            <Search
+                placeholder="input search text"
+                allowClear
+                enterButton="Send"
+                size="large"
+                onSearch={onSearch}
+                />
+            </div>
 
         </Card>
     );

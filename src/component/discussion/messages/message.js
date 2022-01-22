@@ -2,6 +2,7 @@ import React from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {Card} from 'antd';
+import { Avatar } from "@material-ui/core";
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -40,33 +41,24 @@ export default function Message({message, type}) {
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
-
-    if (type == "1") {
         return (
 
 
-            <div className="site-card-border-less-wrapper"  style={{ display: "flex",
-                alignSelf: "flex-end",width: 300,  borderRadius: 22, margin: 15}}>
-                <Card title="Card title" bordered={false}
-                      style={{width: 300, backgroundColor: "green", borderRadius: 22, margin: 15}}>
-                    <p>Card content</p>
-                </Card>
+            <div className="site-card-border-less-wrapper" className="p-2"  style={{
+                alignSelf: "flex-start",width: 300, backgroundColor: "#1b508b", borderRadius: 5, margin: 15}}>
+                
+                <div className="d-flex">
+                <Avatar src={`https://avatars.dicebear.com/api/human/${Math.floor(Math.random() * 5000)}.svg`}/>
+                <h6 className="text-light p-2">
+                    Harsh
+                </h6>
+                </div>
+                <div className="text-light">
+                    Isko Dynamic bana
+                </div>
             </div>
 
         );
-    } else if (type == "2") {
-        return (
-
-
-            <div className="site-card-border-less-wrapper"  style={{
-                alignSelf: "flex-start",width: 300, backgroundColor: "yellow", borderRadius: 22, margin: 15}}>
-                <Card title="Card title" bordered={false}
-                     >
-                    <p>Card content</p>
-                </Card>
-            </div>
-
-        );
-    }
+   
 
 }
