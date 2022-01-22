@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
+import {notification} from 'antd';
+
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -103,11 +105,11 @@ export default function Hackathoncard(props) {
                         You are Host
                         </span>
                         </ColorButton>
-                        </>
-                            :<>
-                            <ColorButton size="small" component={NavLink} to={`/hackathon/${props.hackathonId}`} className="bg-success w-75 mx-auto" style={{
-                                borderRadius: '50px',
-                            }}>
+                        </>:<>
+                        <ColorButton size="small" component={NavLink} to={ props?.user?.email ? `/hackathon/${props.hackathonId}` : `/authenticate`} className="bg-success w-75 mx-auto" style={{
+                            borderRadius: '50px',
+                        }}
+                        >
                         <span className="text-light" style={{
                         fontSize: '18px',
                         fontWeight: 'bold'
