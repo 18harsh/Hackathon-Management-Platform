@@ -81,7 +81,7 @@ export default function Create_hackathon() {
             })
             await addDoc(collection(db, "channels", id, "sub_channels_list"), {
                 "sub_channel_id": id2,
-                "sub_channel_name": "Media",
+                "sub_channel_name": "media",
                 "sub_channel_code_name":"audio_video",
                 "channel_type": "media"
             })
