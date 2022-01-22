@@ -8,8 +8,8 @@ export default function Tabs(props) {
 
     return (<div>
         <div>
-                <Button color="inherit" component={NavLink} to={`/overview/${hackathonId}`}>Overview</Button>
-                <Button color="inherit" component={NavLink} to={`/discussion/${hackathonId}`}>Discussion</Button>
+                <Button color="inherit" component={NavLink} to={`/hackathon/overview/${hackathonId}`}>Overview</Button>
+                <Button color="inherit" component={NavLink} to={`/hackathon/discussion/${hackathonId}`}>Discussion</Button>
 
         </div>
         </div>
