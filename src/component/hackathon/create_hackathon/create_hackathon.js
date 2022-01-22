@@ -11,10 +11,9 @@ import CssTextField from "../../TextField/TextField";
 import {ThemeProvider} from "react-bootstrap";
 
 const validationSchema = yup.object({
-    email: yup
-        .string('Enter your email')
-        .email('Enter a valid email')
-        .required('Email is required'),
+    hackathon_name: yup
+        .string('Enter your hackathon_name')
+        .required('hackathon_name is required'),
     password: yup
         .string('Enter your password')
         .min(8, 'Password should be of minimum 8 characters length')
