@@ -66,12 +66,12 @@ export default function Github_data(props) {
             // console.log(res);
         })
 
-        await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
-            owner: '18harsh',
-            repo: 'A-Study-On-The-Insights-Data-Set'
-        }).then(res=>{
-            console.log(res);
-        })
+        // await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
+        //     owner: '18harsh',
+        //     repo: 'A-Study-On-The-Insights-Data-Set'
+        // }).then(res=>{
+        //     console.log(res);
+        // })
 
     },[])
 
