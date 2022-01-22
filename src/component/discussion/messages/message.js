@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Message({message, type}) {
+export default function Message({message, image,name,time}) {
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
@@ -48,14 +48,23 @@ export default function Message({message, type}) {
                 alignSelf: "flex-start",width: 300, backgroundColor: "#1b508b", borderRadius: 5, margin: 15}}>
                 
                 <div className="d-flex">
-                <Avatar src={`https://avatars.dicebear.com/api/human/${Math.floor(Math.random() * 5000)}.svg`}/>
+                <Avatar src={image=== null? `https://avatars.dicebear.com/api/human/${Math.floor(Math.random() * 5000)}.svg`:image}/>
                 <h6 className="text-light p-2">
-                    Harsh
+                    {name}
                 </h6>
                 </div>
-                <div className="text-light">
-                    Isko Dynamic bana
+                <div style={{
+                    display:"flex",
+                    justifyContent:"space-between"
+                }}>
+                    <div className="text-light">
+                        {message}
+                    </div>
+                    <div className="text-light">
+                        {time.toDate().toLocaleTimeString()}
+                    </div>
                 </div>
+
             </div>
 
         );

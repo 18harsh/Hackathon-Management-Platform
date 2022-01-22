@@ -13,6 +13,10 @@ import {db} from "../../firebaseConfig/firebaseConfig";
 export default function Discussion(props) {
 
     let { hackathonId } = useParams();
+    const [roomList, setRoomList] = React.useState([]);
+    const [currentRoom, setCurrenRoom] = React.useState("general_discussions");
+    const [currentRoomName, setCurrentRoomName] = React.useState("General Discussions");
+    const [loading, setLoading] = React.useState(false);
 
     console.log(hackathonId)
 
@@ -20,7 +24,7 @@ export default function Discussion(props) {
         const auth = getAuth();
         onAuthStateChanged(auth,user => {
 
-            const particpiapntRef = collection(db, "channels");
+            const particpiapntRef = collection(db, "channels",hackathonId,"sub_channels_list");
             const q = query(particpiapntRef);
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const hack = [];
@@ -29,7 +33,7 @@ export default function Discussion(props) {
                     hack.push(doc.data());
                 });
                 if (hack.length !== 0) {
-
+                    setRoomList(hack);
 
                 }
                 console.log(hack)
@@ -37,51 +41,61 @@ export default function Discussion(props) {
             });
 
         })
+        setLoading(true)
+
 
 
 
 
 
         console.log(auth.currentUser)
-    })
+    },[])
 
+    function changeRooms(value) {
+        console.log(value.sub_channel_code_name);
+        setCurrenRoom(value.sub_channel_code_name);
+        setCurrentRoomName(value.sub_channel_name);
+    }
     
 
 
-
-
-        return (
-            <div style={{
-                display:"flex",
-                flexDirection:"column"
-            }}>
-                <Tabs/>
+if(loading) {
+    return (
+        <div style={{
+            display:"flex",
+            flexDirection:"column"
+        }}>
+            <Tabs/>
 
             <div style={{
                 display:"flex"
             }}>
 
-            <div
-                style={{
-                    flex:0.2
-                }}
-            >
-                <LeftPanel/>
-                
+                <div
+                    style={{
+                        flex:0.2
+                    }}
+                >
+                    <LeftPanel sub_channels={roomList} changeRooms={changeRooms}/>
+
+                </div>
+                <div
+                    style={{
+                        flex:0.8
+                    }}
+                >
+                    <RightPanel currentRoom={currentRoom} hackathhonId={hackathonId} currentRoomName={currentRoomName} />
+
+                </div>
+
+
             </div>
-            <div
-                style={{
-                    flex:0.8
-                }}
-            >
-                <RightPanel/>
-                
-            </div>
-               
-                
-            </div>
-            </div>
-        );
+        </div>
+    );
+}
+return <div></div>
+
+
 
 
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,9 @@ import Message from "../messages/message";
 
 import { Input, Space } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
+import {addDoc, collection,orderBy, onSnapshot, query, Timestamp} from "firebase/firestore";
+import {db} from "../../../firebaseConfig/firebaseConfig";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 const { Search } = Input;
 
@@ -63,32 +66,79 @@ const useStyles = makeStyles({
 
 });
 
-const onSearch = value => console.log(value);
 
 
-export default function RightPanel() {
+
+export default function RightPanel(props) {
     const classes = useStyles();
+    const [messages, setMessages] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
+    useEffect(() => {
+        if(props.currentRoomName !== null) {
 
 
-    return (
-        <Card className={classes.root}>
-            <Card className={"mx-2 mt-2"}>
-                    <ColorButton size="small" className="mb-2">#announcments</ColorButton>
+            const particpiapntRef = collection(db, "channels", props.hackathhonId, props.currentRoom);
+            const q = query(particpiapntRef,orderBy("messageCreatedAt", "asc"));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const hack = [];
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.data)
+                    hack.push(doc.data());
+                });
+                if (hack.length !== 0) {
+                    setMessages(hack);
+
+                }
+                console.log(hack)
+
+            });
+            setLoading(true);
+        }
+    }, []);
+
+
+    const onSearch = async value => {
+        const auth = getAuth();
+        onAuthStateChanged(auth,async user => {
+            await addDoc(collection(db, "channels", props.hackathhonId, "general_discussions"), {
+                "message":value,
+                "messageType": "message",
+                "messageCreatedAt": Timestamp.fromDate(new Date()),
+                "user_name":user.reloadUserInfo.screenName,
+                "user_display_image":user.photoURL,
+
+            })
+        });
+
+    };
+    if(loading) {
+        return (
+            <Card className={classes.root}>
+                <Card className={"mx-2 mt-2"}>
+                    <ColorButton size="small" className="mb-2">{props.currentRoomName}</ColorButton>
+                </Card>
+                <div className={classes.root4}>
+                    {messages.map((value)=>{
+                        return   <Message message={value.message} image={value.user_display_image}
+                                          name={value.user_name} time={value.messageCreatedAt} />;
+                    })}
+
+
+                </div>
+                <div className="p-2">
+                    <Search
+                        placeholder="input search text"
+                        allowClear
+                        enterButton="Send"
+                        size="large"
+                        onSearch={onSearch}
+                    />
+                </div>
+
             </Card>
-            <div className={classes.root4}>
-                <Message message={"Hello"} type={"1"}/>
-                <Message message={"Hello"} type={"2"}/>
-            </div>
-            <div className="p-2">
-            <Search
-                placeholder="input search text"
-                allowClear
-                enterButton="Send"
-                size="large"
-                onSearch={onSearch}
-                />
-            </div>
+        );
+    }
+    return <div/>;
 
-        </Card>
-    );
+
 }

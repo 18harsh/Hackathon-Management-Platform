@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function LeftPanel() {
+export default function LeftPanel(props) {
     const [roomName, setRoomName] = React.useState("");
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
@@ -96,15 +96,14 @@ export default function LeftPanel() {
                 </ColorButton>
 
             </CardActions>
-            
-                <ColorButton style={{
+
+            {props.sub_channels.map((value)=>{
+                return <ColorButton onClick={()=>props.changeRooms(value)} style={{
                     border: '0px',
 
-                }} size="small">#announcments</ColorButton>
-                <ColorButton style={{
-                    border: '0px',
+                }} size="small">{value.sub_channel_name}</ColorButton>
+            })}
 
-                }} size="small">#announcments</ColorButton>
 
             <Modal
                 open={open}
