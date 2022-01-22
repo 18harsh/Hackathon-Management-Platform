@@ -9,13 +9,14 @@ import Discussions from "./component/discussion/discussion";
 import {connect} from "react-redux";
 import { Routes, Route,  } from "react-router-dom";
 import CreateHackathon from "./component/hackathon/create_hackathon/create_hackathon";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
   componentDidMount() {
     this.props.onTryAutoSignUp();
   }
+  
 
   render() {
     return (
