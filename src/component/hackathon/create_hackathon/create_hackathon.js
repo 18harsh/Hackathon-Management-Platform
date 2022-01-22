@@ -38,6 +38,7 @@ export default function Create_hackathon() {
 
 
     function handleSubmit() {
+        
         const auth = getAuth();
         onAuthStateChanged(auth, async user => {
             console.log(user.displayName, hackName,website,registrationDate._d,hackStartEnd[0]._d,hackStartEnd[1]._d,hackDescription.html.toString())
@@ -73,24 +74,28 @@ export default function Create_hackathon() {
             flexDirection:"column",
             justifyContent:"center",
             width:500
-        }}>
-            <Input placeholder="hackathon Name"  size="large" onChange={(e) => setHackName(e.target.value)}/>
+        }}
+        className="mx-auto"
+        >
+            <h5 className="mt-3">Hackathon Name</h5>
+            <Input placeholder="hackathon Name" size="large" onChange={(e) => setHackName(e.target.value)}/>
             {/*<Input placeholder="Organiser Name" size="large" onChange={(e)=>setOrganiserName(e.target.value)}/>*/}
             {/*  <Input placeholder="Email Address" size="large" onChange={(e)=>setEmail(e.target.value)}/>*/}
+            <h5 className="mt-3">Hackathon Website</h5>
             <Input placeholder="Hackathon Website"  size="large" onChange={(e) => setWebsite(e.target.value)}/>
             {/*<Input placeholder="Hackathon Instagram Account" size="large"*/}
             {/*       onChange={(e) => setInstagramAcc(e.target.value)}/>*/}
 
             <Space direction="vertical" size={12}>
-                <h5>Registration Start</h5>
+                <h5 className="mt-3">Registration Start</h5>
                 <DatePicker showTime onChange={(value, dateString) => setRegistrationDate(value)}/>
                 <h5>Hackathon Start and End date</h5>
                 <RangePicker showTime onChange={(value, dateString) => setHackStartEnd(value)}/>
             </Space>
-
+            <h5 className="mt-3">Hackathon Description</h5>
             <MdEditor style={{height: '300px'}} renderHTML={text => mdParser.render(text)}
                       onChange={(html, text) => setHackDescription(html)}/>
 
-            <Button type="primary" onClick={handleSubmit}>Submit Button</Button>
+            <Button className="mt-3" type="primary" onClick={handleSubmit}>Submit Button</Button>
         </div>);
 }
