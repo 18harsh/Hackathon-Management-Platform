@@ -149,7 +149,7 @@ class Navbar extends Component {
 
                         </span>
                         <span className={css.categories_Css}>
-                        <ColorButton color="inherit" component={NavLink} to={"/home"}>Challeges</ColorButton>
+                        <ColorButton color="inherit" component={NavLink} to={"/home"}>Challenges</ColorButton>
                         <ColorButton color="inherit" style={{
                             width:200
                         }} component={NavLink} to={"/hackathon/create"}>Organise Hackathon</ColorButton>
