@@ -16,12 +16,13 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 // Finish!
 
 
-const card = ["","","","","","","","","","",""]
 
 class Homepage extends Component {
     state = {
         loading:false,
-        hackathons:[]
+        hackathons:[],
+        auth: null,
+
     }
 
     handleEditorChange({ html, text }) {
@@ -35,6 +36,7 @@ class Homepage extends Component {
 
             this.setState({
                 isAuth: !!user,
+                auth: user
             })
 
 
@@ -46,8 +48,9 @@ class Homepage extends Component {
                 hack.push(doc.data());
             });
             this.setState({
-                hackathons:hack
+                hackathons:hack 
             })
+
             console.log("Current cities in CA: ", hack);
         });
         this.props.onTryAutoSignUp()
@@ -69,7 +72,7 @@ class Homepage extends Component {
                         className="col-4 mb-3"
                         >
 
-                        <Hackathoncard/>
+                        <Hackathoncard hackathon={hackathon} user={this.state.auth}/>
                         </div>
                     ))
                 }

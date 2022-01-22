@@ -54,14 +54,13 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Hackathoncard() {
+export default function Hackathoncard(props) {
     const [roomName, setRoomName] = React.useState("");
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
 
 
-
-
+    console.log(props)
     return (
         <Card className={`${classes.root} `}>
             <div>
@@ -72,19 +71,19 @@ export default function Hackathoncard() {
 
             <CardContent>
                 <Typography variant="h5"  component="h2" >
-                    Hackathon Name
+                    {props.hackathon.hackName}
                 </Typography>
                 <Typography variant="h5" component="h2">
                     Start Date
                 </Typography>
                 <Typography variant="h5" component="h2" color="textSecondary">
-                    21th October 2022
+                    {props.hackathon.hackStart.toDate().toDateString()}
                 </Typography>
                 <Typography variant="h5" component="h2">
                     Last Date
                 </Typography>
                 <Typography variant="h5" component="h2" color="textSecondary">
-                    21th October 2022
+                    {props.hackathon.hackEnd.toDate().toDateString()}
                 </Typography>
             </CardContent>
 
@@ -92,10 +91,27 @@ export default function Hackathoncard() {
                 <ColorButton size="small" className="bg-success w-75 mx-auto" style={{
                     borderRadius: '50px',
                 }}>
-                    <span className="text-light" style={{
+                    {
+                        props.hackathon.organiser_email_id == props.user.email ? 
+                        <>
+                         <span className="text-light" style={{
                         fontSize: '18px',
                         fontWeight: 'bold'
-                    }}>Participate Now</span></ColorButton>
+                    }}>
+                        You are Host
+                        </span>
+                        </>:<>
+                        <span className="text-light" style={{
+                        fontSize: '18px',
+                        fontWeight: 'bold'
+                    }}>
+                        Participate Now
+                        </span>
+                        </>
+
+                    }
+                   
+                </ColorButton>
             </CardActions>
 
 
