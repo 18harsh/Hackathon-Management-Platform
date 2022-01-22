@@ -7,6 +7,8 @@ import {getAuth, GithubAuthProvider,setPersistence,browserSessionPersistence , o
 import { db } from "../../firebaseConfig/firebaseConfig";
 import { doc, setDoc,getFirestore } from "firebase/firestore";
 import GithubButton from 'react-github-login-button'
+import Card from '@material-ui/core/Card';
+
 
 class Authenticate extends Component {
     state = {
@@ -104,7 +106,16 @@ class Authenticate extends Component {
             </div>;
         }
         return (
-            <div >
+            <div className="d-flex justify-content-center align-items-center mx-auto" style={{marginTop:'15vh', width:'450px',height:'500px',boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'}}>
+
+            
+            <Card >
+                <img src={require('./Hackathon_logo.jpeg')} style={{
+                    width:'230px',
+                    height:'250px',
+                    marginBottom: '10px'
+                }}/>
+                
                 {
                     this.props.isAuth ?
                         <>
@@ -112,7 +123,7 @@ class Authenticate extends Component {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                marginTop: 80,
+                                marginTop: 85,
                                 flexDirection: "column",
 
                             }}>
@@ -126,6 +137,7 @@ class Authenticate extends Component {
 
 
                 }
+            </Card>
             </div>
         );
     }

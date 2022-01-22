@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import {TextField} from "@material-ui/core";
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import {Divider} from 'antd';
 
 
 
@@ -57,7 +58,7 @@ export default function OrganizerPage(props) {
 
 
     let {hackathonId} = useParams();
-    const [participants, setParticipants] = useState("");
+    const [participants, setParticipants] = useState();
   
     useEffect(() => {
   
@@ -82,10 +83,70 @@ export default function OrganizerPage(props) {
 
     return (
         <div className={classes.root}>
+            <div className="mx-2">
+                <h4>
+                Total participants: {participants?.length}
+                </h4>
+            </div>
 
             {
-                participants.map((participant)=>(
-                    <div key={participant.hackathonId}>
+                participants?.map((participant)=> (
+                    <div key={participant.hackathonId} className="mx-2" style={{
+                        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+                        transition: '0.3s',
+                        "&:hover": {
+                            boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)'
+                          },
+                        padding: '20px',
+                        marginBottom: '20px'
+                        
+                    }}>
+
+                        <div className="d-flex justify-content-between">
+                            <>
+                        {
+                            participant?.hackathons?.repoName ? 
+                            <h3>
+                            <a href={participant?.hackathons?.repoWebsite} target="_blank" rel="noopener noreferrer" style={{
+                                textDecoration: 'none'
+                            }}>
+                            <span className="text-dark">
+                            {participant?.hackathons?.repoName}
+                            </span>
+                            </a> - <span className="text-success">Submitted</span>
+                            </h3> :
+                            <h3>
+                                <span className="text-danger">Project Not Submitted Yet</span>
+                            </h3>
+                        }</>
+                        <>
+                        Team Id: {participant?.hackathons?.team_id}
+                        </>
+                        
+                        </div>
+                        
+                       <div>
+                            {
+                            participant?.hackathons?.participants.map((name)=>(
+                                <h6>
+                                    {name}  {name === participant?.hackathons?.hackathon_email_id_creator && "(Team Leader)"}
+                                </h6>
+                            ))
+                            }
+                        </div>
+                        
+                        <Divider/>
+                        <div>
+                            <h5>
+                                Project Features
+                            </h5>
+
+                            <div
+                                dangerouslySetInnerHTML={{__html: participant?.hackathons?.projectFeature
+                                    !== "" ? participant?.hackathons?.projectFeature : "<p>Features not added</p>>"}}/>
+                        </div>
+
+
 
                     </div>
                 ))

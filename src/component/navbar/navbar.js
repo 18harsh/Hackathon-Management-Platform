@@ -180,7 +180,7 @@ class Navbar extends Component {
                         <ColorButton color="inherit" component={NavLink} to={"/home"}>Challenges</ColorButton>
                         <ColorButton color="inherit" style={{
                             width:200
-                        }} component={NavLink} to={"/hackathon/create"}>Organise Hackathon</ColorButton>
+                        }} component={NavLink} to={this.props.isAuth ? `/hackathon/create`: `/authenticate`}>Organise Hackathon</ColorButton>
 
 
                          </span>

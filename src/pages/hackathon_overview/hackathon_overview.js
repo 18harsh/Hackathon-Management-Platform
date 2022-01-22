@@ -94,7 +94,7 @@ export default function HackathonOverview(props) {
                 <div className="w-75 mx-auto">
                     <div
                         dangerouslySetInnerHTML={{__html: hackathon[0].hackDescription
-                            !== undefined ? hackathon[0].hackDescription : "<p>Hello</p>>"}}/>
+                            !== undefined ? hackathon[0].hackDescription : "<p>Details comming soon</p>>"}}/>
                 </div>
             </div>
         );
