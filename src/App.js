@@ -5,9 +5,9 @@ import Hackathon from './pages/hackathon/index';
 import Profile from './pages/profile/profile'
 import Authenticate from "./pages/authentication/authenticate";
 import * as actions from './store/actions/userAuthActions';
+import Discussions from "./component/discussion/discussion";
 import {connect} from "react-redux";
 import { Routes, Route,  } from "react-router-dom";
-
 
 
 class App extends Component {
@@ -31,8 +31,10 @@ class App extends Component {
             }/>
             <Route path="/authenticate" element={<Authenticate/>}/>
             <Route path="/user/profile" element={<Profile/>}/>
-            <Route path="/hackathon" element={<Hackathon/>}/>
+            <Route path="/hackathon" element={<Hackathon/>}>
 
+            </Route>
+            <Route path="/discussion" element={<Discussions/>}/>
           </Routes>
         </React.Fragment>
 
