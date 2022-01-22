@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect} from 'react';
 import ColorButton from '../button/button'
 import {NavLink,useParams} from 'react-router-dom';
 import Button from "@material-ui/core/Button";
@@ -34,6 +34,31 @@ export default function Tabs(props) {
     const userCollection = collection(db, "users");
     const [open, setOpen] = React.useState(false);
     const [teamId, setTeamID] = React.useState("");
+    const [userParticipation, setUserParticipation] = React.useState(false);
+    const auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth,user => {
+            console.log(user.email)
+            const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
+            const q = query(particpiapntRef, where("participants", "array-contains",user.email ));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const hack = [];
+                querySnapshot.forEach((doc) => {
+                    hack.push({hackathons: doc.data(),hackathonId:doc.id});
+                });
+                if (hack !== null) {
+                    setUserParticipation(true)
+                }
+                console.log(hack)
+
+            });
+
+        })
+
+
+
+    },[])
     const handleOpen = () => {
         setOpen(true);
     };
@@ -56,6 +81,7 @@ export default function Tabs(props) {
                     "hackathon_user_id_creator":user.uid,
                     "participant_status":true,
                     "joined_as_team":false,
+                    "participants": arrayUnion(user.email)
                 });
 
                 await addDoc(collection(db,"users",user.uid,"hackathons_participated"),{
@@ -166,17 +192,26 @@ export default function Tabs(props) {
 
         </div>
         <div>
-        <ColorButton size="small" onClick={()=>handleOpen()} className="bg-success w-100 ml-auto" style={{
-                            borderRadius: '50px',
-                        }}
-                        >
+            {userParticipation ? <ColorButton size="small" onClick={()=>handleOpen()} className="bg-success w-100 ml-auto" style={{
+                borderRadius: '50px',
+            }}
+            >
                         <span className="text-light" style={{
-                        fontSize: '12px',
-                        fontWeight: 'bold'
-                    }}>
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                        }}>
+You Have Participated Already                        </span>
+            </ColorButton>: <ColorButton size="small" onClick={()=>handleOpen()} className="bg-success w-100 ml-auto" style={{
+                borderRadius: '50px',
+            }}
+            >
+                        <span className="text-light" style={{
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                        }}>
                         Participate Now
                         </span>
-        </ColorButton>
+            </ColorButton>}
         </div>
             <Modal
                 open={open}
