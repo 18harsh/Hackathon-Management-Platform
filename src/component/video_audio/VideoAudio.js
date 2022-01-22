@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { VideoSDKMeeting } from "@videosdk.live/rtc-js-prebuilt";
 
-export default function VideoAudio({meetingId,userName}) {
+export default function VideoAudio({meetingIdVar,userName}) {
     useEffect(() => {
         const apiKey = "868b2fc5-69d2-4a51-8572-b3d58127b42e";
-        const meetingId = "milkyway";
-        const name = "Demo User";
+        const meetingId = meetingIdVar;
+        const name = userName;
 
         const config = {
             name: name,
@@ -13,7 +13,7 @@ export default function VideoAudio({meetingId,userName}) {
             apiKey: apiKey,
 
             containerId: null,
-            redirectOnLeave: "https://www.videosdk.live/",
+            redirectOnLeave: "http:",
 
             micEnabled: true,
             webcamEnabled: true,
