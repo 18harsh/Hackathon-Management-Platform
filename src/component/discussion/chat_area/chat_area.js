@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CssTextField from "../../TextField/TextField";
+import Message from "../messages/message";
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -49,6 +50,16 @@ const useStyles = makeStyles({
         border:"1px solid #325288",
 
     },
+    root4: {
+        display:"flex",
+        flexDirection:"column",
+        width: "98%",
+        minHeight:"700px",
+        backgroundColor:"#",
+        margin:10,
+        border:"1px solid #325288",
+
+    },
 
 });
 
@@ -63,7 +74,10 @@ export default function RightPanel() {
                     <ColorButton size="small">#announcments</ColorButton>
                 </CardActions>
             </Card>
-
+            <Card className={classes.root4}>
+                <Message message={"Hello"} type={"1"}/>
+                <Message message={"Hello"} type={"2"}/>
+            </Card>
             <Card className={classes.root3}>
 
             </Card>

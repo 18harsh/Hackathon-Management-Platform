@@ -8,7 +8,7 @@ export default class Tabs extends Component {
     return (<div>
         <div>
                 <ColorButton color="inherit" component={NavLink} to={'/overview'}>Overview</ColorButton>
-                <ColorButton color="inherit" component={NavLink} to={'/discussion'}>Discussion</ColorButton>
+                <ColorButton color="inherit" component={NavLink} to={'/hackathon/discussion'}>Discussion</ColorButton>
 
         </div>
     </div>);

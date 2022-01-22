@@ -27,16 +27,17 @@ class App extends Component {
             <Route path="/" element={
               <Homepage/>
             }/>
-            <Route path="/home" element={
+            <Route path="home" element={
               <Homepage/>
             }/>
-            <Route path="/authenticate" element={<Authenticate/>}/>
-            <Route path="/user/profile" element={<Profile/>}/>
-            <Route path="/hackathon" element={<Hackathon/>}>
-
+            <Route path="authenticate" element={<Authenticate/>}/>
+            <Route path="profile" element={<Profile/>}/>
+            <Route path="hackathon" element={<Hackathon/>}>
+              <Route path="overview" element={<Discussions/>}/>
+              <Route path="discussion" element={<Discussions/>}/>
             </Route>
-            <Route path="/discussion" element={<Discussions/>}/>
-            <Route path="/hackathon/create" element={<CreateHackathon/>}/>
+
+            <Route path="hackathon/create" element={<CreateHackathon/>}/>
           </Routes>
         </React.Fragment>
 

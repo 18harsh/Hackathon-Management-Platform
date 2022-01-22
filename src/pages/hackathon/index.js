@@ -2,11 +2,9 @@ import React,{Component} from "react";
 import * as actions from "../../store/actions/userAuthActions";
 import {connect} from "react-redux";
 import css from './homepage.module.css'
-
-
 import {getAuth,  onAuthStateChanged} from "firebase/auth";
 import Tabs from "../../component/tabs/tabs";
-import { Outlet } from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 
 class Hackathon extends Component {
     
@@ -32,8 +30,17 @@ class Hackathon extends Component {
 
     render() {
         return (
-            <div className={css.homepage}>
+            <div style={{
+                display:"flex",
+                flexDirection:"column"
+            }}>
+                <div style={{
+                    display:"flex",
+                    flexDirection:"column",
+                    justifyContent:"center"
+                }}>
                <Tabs/>
+                </div>
                 <Outlet/>
                </div>
 
