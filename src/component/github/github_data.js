@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+
 import { List } from 'antd';
 import {Octokit} from "@octokit/core";
 import {useParams} from "react-router-dom";
@@ -12,27 +12,9 @@ const octokit = new Octokit({auth: "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"});
 
 
 
-const useStyles = makeStyles({
-    root: {
-        overflow: 'auto',
-        height:"82vh",
-        backgroundColor:"white",
-        margin:10
-    },
-    paper: {
-        position: 'absolute',
-        width: 300,
-        display:"flex",
-        flexDirection:"column",
 
-        backgroundColor: "#FAEEE7",
-        border: '2px solid #000',
-        boxShadow: "#FAEEE7",
-        padding: 10,
-    },
-});
 
-export default function Github_data(props) {
+export default function Github_data() {
 
     let {hackathonId,teamId} = useParams();
     const [hacks, setHacks] = useState([]);
@@ -41,11 +23,10 @@ export default function Github_data(props) {
     const [fileDirectory, setFileDirectory] = useState({});
     // getModalStyle is not a pure function, we roll the style only on the first render
 
-    useEffect(async () => {
-        const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
-        const q = query(particpiapntRef, where("team_id", "==", teamId));
-
-        const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+    async function fetchGithubData() {
+        const participantRef = collection(db, "hackathons", hackathonId, "participants");
+        const q = query(participantRef, where("team_id", "==", teamId));
+        onSnapshot(q, async (querySnapshot) => {
             const hack = [];
             querySnapshot.forEach((doc) => {
                 hack.push({hackathons: doc.data(), hackathonId: doc.id});
@@ -54,26 +35,26 @@ export default function Github_data(props) {
             console.log(hack)
 
 
+        });
+        await octokit.request('GET /repos/{owner}/{repo}/branches', {
+            owner: hacks[0].hackathons.repoOwner,
+            repo: hacks[0].hackathons.repoName,
+        }).then(res => {
+            console.log(res);
+            setBranches(res)
         })
-            await octokit.request('GET /repos/{owner}/{repo}/branches', {
-                owner: hacks[0].hackathons.repoOwner,
-                repo:  hacks[0].hackathons.repoName,
-            }).then(res => {
-                console.log(res);
-                setBranches(res)
-            })
 
-            await octokit.request('GET /repos/{owner}/{repo}/commits', {
-                owner: hacks[0].hackathons.repoOwner,
-                repo:  hacks[0].hackathons.repoName,
-            }).then(res => {
-                console.log(res);
-                setCommits(res)
-            })
+        await octokit.request('GET /repos/{owner}/{repo}/commits', {
+            owner: hacks[0].hackathons.repoOwner,
+            repo: hacks[0].hackathons.repoName,
+        }).then(res => {
+            console.log(res);
+            setCommits(res)
+        })
 
         await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
             owner: hacks[0].hackathons.repoOwner,
-            repo:  hacks[0].hackathons.repoName,
+            repo: hacks[0].hackathons.repoName,
 
         }).then(res => {
             console.log(res);
@@ -86,21 +67,15 @@ export default function Github_data(props) {
         // }).then(res=>{
         //     console.log(res);
         // })
+    }
+    useEffect( () => {
+        fetchGithubData();
 
-    },[])
+    },[fetchGithubData, hackathonId, hacks, teamId])
 
 
 
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
 
 
