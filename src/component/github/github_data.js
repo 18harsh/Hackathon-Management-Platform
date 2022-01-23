@@ -1,25 +1,13 @@
-import React, {useEffect} from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-
-import Button from '@material-ui/core/Button';
-
-
+import React, {useEffect, useState} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import { List } from 'antd';
 import {Octokit} from "@octokit/core";
+import {useParams} from "react-router-dom";
+import {  collection,  onSnapshot, query, where} from "firebase/firestore";
+import {db} from "../../firebaseConfig/firebaseConfig";
+
 
 const octokit = new Octokit({auth: "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"});
-
-const ColorButton = withStyles((theme) => ({
-    root: {
-        color: '#325288 !important',
-        fontFamily: "'Montserrat', sans-serif",
-        fontSize: "15px",
-        margin:5,
-        width:"100%",
-        textTransform:"none",
-        border:"1px solid #325288"
-    },
-}))(Button);
 
 
 
@@ -45,25 +33,51 @@ const useStyles = makeStyles({
 });
 
 export default function Github_data(props) {
-    const [roomName, setRoomName] = React.useState("");
-    const classes = useStyles();
 
+    let {hackathonId,teamId} = useParams();
+    const [hacks, setHacks] = useState([]);
+    const [branches, setBranches] = useState({});
+    const [commits, setCommits] = useState({});
+    const [fileDirectory, setFileDirectory] = useState({});
     // getModalStyle is not a pure function, we roll the style only on the first render
 
     useEffect(async () => {
+        const particpiapntRef = collection(db, "hackathons", hackathonId, "participants");
+        const q = query(particpiapntRef, where("team_id", "==", teamId));
 
-        await octokit.request('GET /repos/{owner}/{repo}/branches', {
-            owner: '18harsh',
-            repo: 'Whatsapp-Clone',
-        }).then(res=>{
-            console.log(res);
+        const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+            const hack = [];
+            querySnapshot.forEach((doc) => {
+                hack.push({hackathons: doc.data(), hackathonId: doc.id});
+            });
+            setHacks(hack);
+            console.log(hack)
+
+
         })
+            await octokit.request('GET /repos/{owner}/{repo}/branches', {
+                owner: hacks[0].hackathons.repoOwner,
+                repo:  hacks[0].hackathons.repoName,
+            }).then(res => {
+                console.log(res);
+                setBranches(res)
+            })
 
-        await octokit.request('GET /repos/{owner}/{repo}/commits', {
-            owner: '18harsh',
-            repo: 'Whatsapp-Clone',
-        }).then(res=>{
-            // console.log(res);
+            await octokit.request('GET /repos/{owner}/{repo}/commits', {
+                owner: hacks[0].hackathons.repoOwner,
+                repo:  hacks[0].hackathons.repoName,
+            }).then(res => {
+                console.log(res);
+                setCommits(res)
+            })
+
+        await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+            owner: hacks[0].hackathons.repoOwner,
+            repo:  hacks[0].hackathons.repoName,
+
+        }).then(res => {
+            console.log(res);
+            setFileDirectory(res)
         })
 
         // await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
@@ -74,6 +88,9 @@ export default function Github_data(props) {
         // })
 
     },[])
+
+
+
 
     const [open, setOpen] = React.useState(false);
 
@@ -89,8 +106,57 @@ export default function Github_data(props) {
 
 
     return (
-        <Card className={classes.root}>
+        <div style={{
+            display:'flex',
+            flexDirection:"row"
+        }}>
+            <div style={{
+                width:300,margin:10
+            }}>
+                <List
+                    header={<div>Branches</div>}
 
-        </Card>
+                    bordered
+                    dataSource={branches.data}
+                    renderItem={item => (
+                        <List.Item>
+                            Branch Name:- {item.name}
+                        </List.Item>
+                    )}
+                />
+            </div>
+            <div style={{
+                width:300,margin:10
+            }}>
+                <List
+                    header={<div>Commits</div>}
+
+                    bordered
+                    dataSource={commits.data}
+                    renderItem={item => (
+                        <List.Item>
+                            {item.author.login} :- {item.commit.committer.date}
+                        </List.Item>
+                    )}
+                />
+            </div>
+            <div style={{
+                width:300,
+                margin:10
+            }}>
+                <List
+                    header={<div>Folder and Files</div>}
+
+                    bordered
+                    dataSource={fileDirectory.data}
+                    renderItem={item => (
+                        <List.Item>
+                             <a href={item.html_url}>{item.name}</a>
+                        </List.Item>
+                    )}
+                />
+
+            </div>
+        </div>
     );
 }

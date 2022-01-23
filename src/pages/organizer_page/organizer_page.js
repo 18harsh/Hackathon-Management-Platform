@@ -8,7 +8,7 @@ import {Divider, notification} from 'antd';
 import {db} from "../../firebaseConfig/firebaseConfig";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {arrayUnion, collection, doc, onSnapshot, query, setDoc, Timestamp, updateDoc, where} from "firebase/firestore";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import {Search} from "@material-ui/icons";
 import { Input, Space } from 'antd';
 
@@ -156,14 +156,23 @@ export default function OrganizerPage(props) {
                         </div>
                         
                         <Divider/>
-                        <div>
-                            <h5>
-                                Project Features
-                            </h5>
+                        <div style={{
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"
+                        }}>
+                            <div>
+                                <h5>
+                                    Project Features
+                                </h5>
 
-                            <div
-                                dangerouslySetInnerHTML={{__html: participant?.hackathons?.projectFeature
-                                    !== "" ? participant?.hackathons?.projectFeature : "<p>Features not added</p>>"}}/>
+                                <div
+                                    dangerouslySetInnerHTML={{__html: participant?.hackathons?.projectFeature
+                                        !== "" ? participant?.hackathons?.projectFeature : "<p>Features not added</p>>"}}/>
+                            </div>
+                            <div>
+                                <ColorButton component={NavLink} to={`/hackathon/github/${hackathonId}/${participant?.hackathons?.team_id}`}>Check out Git Stats </ColorButton>
+                            </div>
                         </div>
 
 

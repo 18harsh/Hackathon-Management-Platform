@@ -46,9 +46,9 @@ class App extends Component {
               <Route path="discussion/:hackathonId" element={<Discussion/>}/>
               <Route path="submission/:hackathonId" element={<Submission/>}/>
               <Route path="participants/:hackathonId" element={<OrganizerPage/>}/>
-
+              <Route path="github/:hackathonId/:teamId" element={<Github_data/>}/>
             </Route>
-            <Route path="github/" element={<Github_data/>}/>
+
             <Route path="hackathon/create" element={<CreateHackathon/>}/>
           </Routes>
         </React.Fragment>

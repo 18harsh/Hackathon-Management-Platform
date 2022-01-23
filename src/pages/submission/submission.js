@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 export default function Submission(props) {
     let {hackathonId} = useParams();
     const [repoName, setRepoName] = useState("");
+    const [repoOwner, setRepoOwner] = useState("");
     const [repoWebsite, setRepoWebsite] = useState("");
     const [projectFeature, setProjectFeature] = useState("");
 
@@ -65,6 +66,7 @@ export default function Submission(props) {
 
         await updateDoc(doc(db, `hackathons/${hackathonId}/participants`, participantId), {
             "repoName":repoName,
+            "repoOwner":repoOwner,
             "repoWebsite": repoWebsite,
             "projectFeature":projectFeature.html
         }).then(data=>{
@@ -93,7 +95,11 @@ export default function Submission(props) {
         >
             <h5 className="mt-3">Github Repository Name</h5>
             <Input placeholder="Github Repository Name" size="large" onChange={(e) => setRepoName(e.target.value)}/>
-            <h5 className="mt-3">Github Repository Link</h5>
+                <h5 className="mt-3">Github Repository Owner</h5>
+                <Input placeholder="Github User Id" size="large" onChange={(e) => setRepoOwner(e.target.value)}/>
+
+
+                <h5 className="mt-3">Github Repository Link</h5>
             <Input placeholder="Github Repository Link"  size="large" onChange={(e) => setRepoWebsite(e.target.value)}/>
             
             <h5 className="mt-3">Project Features</h5>
