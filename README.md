@@ -22,3 +22,11 @@ Integrate A Chat room per Hackathon and Video and Audio Calling Session.
 An Individual Team can upload their project on the platform.
 
 The Organiser can also view the project and its GitHub stats respectively.
+
+
+<h3> A Demo of the App Made in React</h3>
+
+<video src="https://www.youtube.com/watch?v=10yAdliVrG8" autoplay controls width="100%" height="100%" />
+
+
+
