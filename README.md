@@ -28,5 +28,7 @@ The Organiser can also view the project and its GitHub stats respectively.
 
 <video src="https://www.youtube.com/watch?v=10yAdliVrG8" autoplay controls width="100%" height="100%" />
 
-
+<iframe width="420" height="315"
+src="https://www.youtube.com/embed/10yAdliVrG8?autoplay=1&mute=1">
+</iframe>
 
