@@ -26,6 +26,6 @@ The Organiser can also view the project and its GitHub stats respectively.
 
 <h3> A Demo of the App Made in React</h3>
 
-<video src="https://github.com/18harsh/UNS_2_BazingaCoderzzz/blob/main/HackDev.mp4" autoplay controls width="100%" height="100%" />
+<video src="https://github.com/18harsh/UNS_2_BazingaCoderzzz/issues/1#issue-1112344238" autoplay controls width="100%" height="100%" />
 
 
