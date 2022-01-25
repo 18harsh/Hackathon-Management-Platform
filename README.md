@@ -30,13 +30,9 @@ The Organiser can also view the project and its GitHub stats respectively.
 https://user-images.githubusercontent.com/58548322/150751469-5cdc9c55-2658-459b-b2aa-bcd3f0c72252.mp4
 
 
-<video src="https://github.com/18harsh/UNS_2_BazingaCoderzzz/issues/1#issue-1112344238" autoplay controls width="100%" height="100%" />
 
 
 
-# Certificate
-
-<img src="https://github.com/18harsh/UNS_2_BazingaCoderzzz/blob/main/certificate.png"/>
 
 
 
