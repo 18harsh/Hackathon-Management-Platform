@@ -36,7 +36,7 @@ https://user-images.githubusercontent.com/58548322/150751469-5cdc9c55-2658-459b-
 
 # Certificate
 
-![certificate](https://user-images.githubusercontent.com/58548322/150974538-5e20ff9c-8081-4faf-b442-fdc77e8f745d.png)
+![certificate]("https://github.com/18harsh/UNS_2_BazingaCoderzzz/blob/main/certificate.png")
 
 
 
