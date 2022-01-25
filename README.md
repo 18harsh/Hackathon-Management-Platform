@@ -32,4 +32,7 @@ https://user-images.githubusercontent.com/58548322/150751469-5cdc9c55-2658-459b-
 
 <video src="https://github.com/18harsh/UNS_2_BazingaCoderzzz/issues/1#issue-1112344238" autoplay controls width="100%" height="100%" />
 
+# Certificate
+
+[generated.pdf](https://github.com/18harsh/UNS_2_BazingaCoderzzz/files/7933350/generated.pdf)
 
