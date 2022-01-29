@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from "./redux/index";
 import SnackBarComponent from "./components/snackbar/snackbar";
 import { Routes, Route,  } from "react-router-dom";
-import Homepage from "./pages/Homepage/HomePage";
+import Homepage from "./pages/Homepage/homepage";
 import Profile from "./pages/Profile/profile";
 import {ThemeProvider} from "@mui/material";
 import theme from './theme/theme';
